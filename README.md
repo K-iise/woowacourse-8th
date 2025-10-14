@@ -1,1 +1,40 @@
-# java-calculator-precourse
+# 문자열 덧셈 계산기
+
+## ✏️ 구현 기능 목록
+
+- 빈 문자열(공백, null, 엔터, 탭)의 입력은 0을 반환한다.
+- 단일 숫자의 입력은 그 숫자 그대로 반환한다.
+- 기본 구분자(쉼표(,) 또는 콜론(;))를 기준으로 숫자의 합을 반환한다.
+- 커스텀 구분자("//"과 "\n"사이에 위치하는 문자)를 기준으로 각 숫자의 합을 반환한다.
+
+## ⚠️ 예외 처리
+
+**IllegalArgumentException** 발생
+
+- 음수 또는 소수가 포함된 입력의 경우
+- 숫자 이외의 문자가 입력된 경우
+- 기본, 커스텀 구분자 외 문자가 입력된 경우
+
+### ✔️ 고려사항
+
+- [ ] 숫자는 커스텀 구분자가 될 수 있는가?
+- [ ] 커스텀 구분자와 기본 구분자는 혼용될 수 있는가?
+- [ ] 문장에 공백이 포함된 경우 어떻게 처리하는가?
+
+## 📃 Commit Message Conventions
+
+[**AngularJS Git Commit Message Conventions**](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
+
+Commit message는 크게 **제목, 본문, 꼬리말** 세 가지 파트로 분류한다.
+
+### *Commit Type*
+
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 수정
+- style : 코드 포맷팅
+- refactor : 코드 리팩토링
+- test : 테스트 코드, 리팩토링 테스트 코드 추가
+- chore : 빌드 작업 및 도구 관련 수정
+
+
