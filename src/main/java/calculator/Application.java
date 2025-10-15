@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.awt.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -25,17 +27,46 @@ public class Application {
 
         }
 
-        // 기본 구분자 처리
+      // 기본 구분자 처리
         String[] numbers = input.split("[,;]");
         int result = 0;
         for (int i = 0; i < numbers.length; i++) {
             // 구분자 사이에 숫자가 없을 경우
-            if(numbers[i] == null || numbers[i].isBlank()){
+            if (numbers[i] == null || numbers[i].isBlank()) {
                 result += 0;
-            }
-            else
+            } else
                 result += Integer.parseInt(numbers[i]);
         }
-        System.out.print("결과값 : " + result);
+        if (result > 0)
+            System.out.print("결과값 : " + result);
+
+        // 커스텀 구분자 처리
+        Pattern pattern = Pattern.compile("//(.)\\\\n(.*)$");
+        Matcher matcher = pattern.matcher(input);
+        String delimiter;
+        if (matcher.find()) {
+            delimiter = matcher.group(1);
+            String inputs = matcher.group(2);
+            System.out.println(delimiter);
+
+            String[] number = inputs.split(delimiter);
+
+            int results = 0;
+            for (int i = 0; i < numbers.length; i++) {
+                // 구분자 사이에 숫자가 없을 경우
+                if (number[i] == null || number[i].isBlank()) {
+                    result += 0;
+                }
+                // 구분자 사이의 문자가 양수인 경우
+                else if(number[i].matches("^\\d+$")) {
+                    result += Integer.parseInt(number[i]);
+                    System.out.println(number[i]);
+                }
+            }
+            if (result > 0)
+                System.out.print("결과값 : " + result);
+        }
+
+
     }
 }
