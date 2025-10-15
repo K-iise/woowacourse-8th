@@ -25,5 +25,17 @@ public class Application {
 
         }
 
+        // 기본 구분자 처리
+        String[] numbers = input.split("[,;]");
+        int result = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            // 구분자 사이에 숫자가 없을 경우
+            if(numbers[i] == null || numbers[i].isBlank()){
+                result += 0;
+            }
+            else
+                result += Integer.parseInt(numbers[i]);
+        }
+        System.out.print("결과값 : " + result);
     }
 }
