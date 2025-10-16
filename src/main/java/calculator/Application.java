@@ -1,16 +1,14 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import calculator.view.InputView;
 
-import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        System.out.println("덧셈할 문자열을 입력해주세요.");
-        String input = Console.readLine();
+        String input = InputView.getIntput();
 
         // 빈 문자열 및 공백 처리
         if(input == null || input.isBlank()){
