@@ -13,7 +13,9 @@ public class Validator {
      * 숫자 판별
      */
     public boolean IsInteger(String candidate){
-        return candidate.matches("^\\d+$");
+        if (IsBlank(candidate))
+            return candidate.matches("^\\d+$");
+        return false;
     }
 
     public void IsException(String text){
