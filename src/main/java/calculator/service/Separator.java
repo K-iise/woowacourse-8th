@@ -16,7 +16,7 @@ public class Separator {
     /**
      * 커스텀 구분자 추출
      */
-    private String getDelimiterRegex(String text){
+    public String getDelimiterRegex(String text){
         Pattern ptn = Pattern.compile(CUSTOM_DELIMTER_PATTERN);
         Matcher mtc = ptn.matcher(text);
         if (mtc.find()){
@@ -28,7 +28,7 @@ public class Separator {
     /**
      * 문자열 가공
      */
-    private String getExtraText(String text){
+    public String getExtraText(String text){
         Pattern ptn = Pattern.compile(CUSTOM_DELIMTER_PATTERN);
         Matcher mtc = ptn.matcher(text);
         if (mtc.find()){
@@ -40,18 +40,18 @@ public class Separator {
     /**
      *  문자열 계산
      */
-    private int calculatateTotal(String text){
+    public int calculateTotal(String text){
 
         String extraText = getExtraText(text);
         String totalRegex = getDelimiterRegex(text);
         String []tokens = extraText.split(totalRegex);
-        int total = 0;
+        int result = 0;
         for (String token : tokens){
             if (validator.IsBlank(token))
                 continue;
-            if (validator.IsInteger(token))
-                total += Integer.parseInt(token);
+            if (!validator.IsException(token))
+                result += Integer.parseInt(token);
         }
-        return total;
+        return result;
     }
 }

@@ -13,14 +13,15 @@ public class Validator {
      * 숫자 판별
      */
     public boolean IsInteger(String candidate){
-        if (IsBlank(candidate))
+        if (!IsBlank(candidate))
             return candidate.matches("^\\d+$");
         return false;
     }
 
-    public void IsException(String text){
+    public boolean IsException(String text){
         if (!IsInteger(text)) {
             throw new IllegalArgumentException("입력은 양의 정수여야 합니다.");
         }
+        return false;
     }
 }
