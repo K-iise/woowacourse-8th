@@ -7,12 +7,6 @@ public class Separator {
     private final String BASIC_DELIMITER_REGEX = "[,;]";
     private final String CUSTOM_DELIMTER_PATTERN = "//(.)\\\\n(.*)$";
 
-    private final Validator validator;
-
-    public Separator(Validator validator){
-        this.validator = validator;
-    }
-    
     /**
      * 커스텀 구분자 추출
      */
@@ -37,21 +31,4 @@ public class Separator {
         return text;
     }
 
-    /**
-     *  문자열 계산
-     */
-    public int calculateTotal(String text){
-
-        String extraText = getExtraText(text);
-        String totalRegex = getDelimiterRegex(text);
-        String []tokens = extraText.split(totalRegex);
-        int result = 0;
-        for (String token : tokens){
-            if (validator.IsBlank(token))
-                continue;
-            if (!validator.IsException(token))
-                result += Integer.parseInt(token);
-        }
-        return result;
-    }
 }
