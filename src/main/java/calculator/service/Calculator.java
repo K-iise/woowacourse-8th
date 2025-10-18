@@ -11,9 +11,6 @@ public class Calculator {
         this.separator = separator;
     }
 
-    /**
-     *  문자열 계산
-     */
     public int calculateTotal(String text){
         String extraText = separator.getExtraText(text);
         String totalRegex = separator.getDelimiterRegex(text);
