@@ -20,10 +20,7 @@ public class Calculator {
         String []tokens = extraText.split(totalRegex);
         int result = 0;
         for (String token : tokens){
-            if (validator.IsBlank(token))
-                continue;
-            if (!validator.IsException(token))
-                result += Integer.parseInt(token);
+            result += validator.getValidateValue(token);
         }
         return result;
     }
