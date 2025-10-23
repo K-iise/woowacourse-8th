@@ -21,4 +21,19 @@ public class InputViewTest {
     //then
     Assertions.assertThat(carsname).isEqualTo("pobi,woni,jun");
   }
+
+  @Test
+  public void 시도_횟수_입력() {
+    // given
+    String input = "5";
+    InputStream fakeInputStream = new ByteArrayInputStream(input.getBytes());
+    System.setIn(fakeInputStream);
+    InputView inputView = new InputView();
+
+    // when
+    String count = inputView.getTryCount();
+
+    // then
+    Assertions.assertThat(count).isEqualTo("5");
+  }
 }
