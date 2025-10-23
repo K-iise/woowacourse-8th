@@ -1,11 +1,18 @@
 package racingcar.view;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class InputViewTest {
+
+  @AfterEach
+  public void tearDown() {
+    Console.close();
+  }
 
   @Test
   public void 자동차_이름_입력() {
@@ -26,8 +33,8 @@ public class InputViewTest {
   public void 시도_횟수_입력() {
     // given
     String input = "5";
-    InputStream fakeInputStream = new ByteArrayInputStream(input.getBytes());
-    System.setIn(fakeInputStream);
+    InputStream fakeStream = new ByteArrayInputStream(input.getBytes());
+    System.setIn(fakeStream);
     InputView inputView = new InputView();
 
     // when
