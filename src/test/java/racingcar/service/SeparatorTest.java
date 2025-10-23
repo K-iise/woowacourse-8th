@@ -13,9 +13,10 @@ public class SeparatorTest {
         // given
         String input = "pobi,woni,jun";
         List<String> testNames = new ArrayList<>(Arrays.asList("pobi", "woni", "jun"));
+        Separator separator = new Separator();
 
         // when
-        List<String> CarNames = Separator.parseCarNames(input);
+        List<String> CarNames = separator.parseCarNames(input);
 
         // then
         Assertions.assertThat(CarNames).isEqualTo(testNames);
