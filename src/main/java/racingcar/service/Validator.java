@@ -17,4 +17,10 @@ public class Validator {
             throw new IllegalArgumentException(InVALID_NAME_LENGTH_MESSAGE);
         }
     }
+
+    public void checkDuplicateName(List<String> name) {
+        if (name.stream().distinct().count() != name.size()) {
+            throw new IllegalArgumentException("이름은 중복될 수 없습니다.");
+        }
+    }
 }

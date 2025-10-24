@@ -34,7 +34,7 @@ public class ValidatorTest {
     @Test
     public void 자동차_이름_중복_검사_예외_발생() {
         // given
-        List<String> name = new ArrayList<>(List.of("pobi", "pobi", ""));
+        List<String> names = new ArrayList<>(List.of("pobi", "pobi", ""));
         Validator validator = new Validator();
 
         // when & then
@@ -51,7 +51,7 @@ public class ValidatorTest {
 
         // when & then
         Assertions.assertDoesNotThrow(() -> {
-            validator.checkDuplicateName(name);
+            validator.checkDuplicateName(names);
         });
     }
 }
