@@ -30,4 +30,28 @@ public class ValidatorTest {
             validator.checkOverLength(names);
         });
     }
+
+    @Test
+    public void 자동차_이름_중복_검사_예외_발생() {
+        // given
+        List<String> name = new ArrayList<>(List.of("pobi", "pobi", ""));
+        Validator validator = new Validator();
+
+        // when & then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            validator.checkDuplicateName(names);
+        });
+    }
+
+    @Test
+    public void 자동자_이름_중복_검사_통과() {
+        // given
+        List<String> names = new ArrayList<>(List.of("pobi", "woni", "jun"));
+        Validator validator = new Validator();
+
+        // when & then
+        Assertions.assertDoesNotThrow(() -> {
+            validator.checkDuplicateName(name);
+        });
+    }
 }
