@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ValidatorTest {
-    
+
     @Test
     public void 이름_5자_초과_예외_발생() {
         // given
@@ -15,7 +15,7 @@ public class ValidatorTest {
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            validator.checkOverLength();
+            validator.checkOverLength(names);
         });
     }
 
@@ -27,7 +27,7 @@ public class ValidatorTest {
 
         // when & then
         Assertions.assertDoesNotThrow(() -> {
-            validator.checkOverLength();
+            validator.checkOverLength(names);
         });
     }
 }
