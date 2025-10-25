@@ -25,6 +25,6 @@ public class CarTest {
         car.addWeight(3); // 4 이상이면 이동
 
         // then
-        Assertions.assertThat(car.getWeight()).isEqualTo(1);
+        Assertions.assertThat(car.getWeight()).isEqualTo(0);
     }
 }
