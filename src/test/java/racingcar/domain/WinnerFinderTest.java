@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class WinnerFinderTest {
+
     @Test
     public void 가장_많이_전진한_자동차_목록() {
         // given
@@ -18,7 +19,7 @@ public class WinnerFinderTest {
         jordan.addWeight(5);
 
         List<Car> cars = new ArrayList<>(List.of(james, cobi, jordan));
-        WinnerFinder winnerFinder = new WinnerFinderTest();
+        WinnerFinder winnerFinder = new WinnerFinder();
 
         // when
         List<Car> winners = winnerFinder.findWinners(cars);
@@ -26,6 +27,6 @@ public class WinnerFinderTest {
         // then
         Assertions.assertTrue(winners.contains(cobi));
         Assertions.assertTrue(winners.contains(jordan));
-        Assertions.assertEquals(winners.size(), 2);
+        Assertions.assertEquals(2, winners.size());
     }
 }
