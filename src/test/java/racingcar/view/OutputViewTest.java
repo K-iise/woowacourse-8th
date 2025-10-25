@@ -32,10 +32,15 @@ public class OutputViewTest {
         List<Car> cars = new ArrayList<>(List.of(new Car("yun"), new Car("cobi")));
         cars.get(1).addWeight(5);
 
+        String expected = String.join(System.lineSeparator(),
+                "yun : ",
+                "cobi : -",
+                "");
+
         // when
         outputView.printProcess(cars);
 
         // then
-        Assertions.assertEquals("yun : \n" + "cobi : -\n", outputStream.toString());
+        Assertions.assertEquals(expected, outputStream.toString());
     }
 }
