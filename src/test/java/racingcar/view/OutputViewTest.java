@@ -43,4 +43,20 @@ public class OutputViewTest {
         // then
         Assertions.assertEquals(expected, outputStream.toString());
     }
+
+    @Test
+    public void 최종_우승자_출력() {
+        // given
+        OutputView outputView = new OutputView();
+        List<Car> cars = new ArrayList<>(List.of(new Car("yun"), new Car("cobi")));
+        cars.get(1).addWeight(5);
+
+        String expected = String.join(System.lineSeparator(),
+                "최종우승자 : cobi");
+        // when
+        outputView.printWinner(cars);
+        
+        // then
+        Assertions.assertEquals(expected, outputStream.toString());
+    }
 }
