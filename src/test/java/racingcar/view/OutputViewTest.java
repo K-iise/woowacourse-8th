@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.Car;
+import racingcar.domain.WinnerFinder;
 
 public class OutputViewTest {
 
@@ -48,14 +49,15 @@ public class OutputViewTest {
     public void 최종_우승자_출력() {
         // given
         OutputView outputView = new OutputView();
+        WinnerFinder winnerFinder = new WinnerFinder();
         List<Car> cars = new ArrayList<>(List.of(new Car("yun"), new Car("cobi")));
         cars.get(1).addWeight(5);
 
-        String expected = String.join(System.lineSeparator(),
-                "최종우승자 : cobi");
+        String expected = "최종우승자 : cobi";
+
         // when
-        outputView.printWinner(cars);
-        
+        outputView.printWinner(winnerFinder.findWinners(cars));
+
         // then
         Assertions.assertEquals(expected, outputStream.toString());
     }
