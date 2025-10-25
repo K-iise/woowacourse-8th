@@ -25,10 +25,8 @@ public class Validator {
     }
 
     public void checkEmptyName(List<String> name) {
-        for (String checkName : name) {
-            if (checkName.isBlank()) {
-                throw new IllegalArgumentException("이름은 공백이 될 수 없습니다,");
-            }
+        if (name.stream().anyMatch(String::isBlank)) {
+            throw new IllegalArgumentException("이름은 공백이 될 수 없습니다,");
         }
     }
 }
