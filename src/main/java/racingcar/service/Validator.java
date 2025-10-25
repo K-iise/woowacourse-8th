@@ -23,4 +23,12 @@ public class Validator {
             throw new IllegalArgumentException("이름은 중복될 수 없습니다.");
         }
     }
+
+    public void checkEmptyName(List<String> name) {
+        for (String checkName : name) {
+            if (checkName.isBlank()) {
+                throw new IllegalArgumentException("이름은 공백이 될 수 없습니다,");
+            }
+        }
+    }
 }
