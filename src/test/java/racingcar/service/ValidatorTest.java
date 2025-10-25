@@ -14,9 +14,7 @@ public class ValidatorTest {
         Validator validator = new Validator();
 
         // when & then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            validator.checkOverLength(names);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> validator.checkOverLength(names));
     }
 
     @Test
@@ -26,9 +24,7 @@ public class ValidatorTest {
         Validator validator = new Validator();
 
         // when & then
-        Assertions.assertDoesNotThrow(() -> {
-            validator.checkOverLength(names);
-        });
+        Assertions.assertDoesNotThrow(() -> validator.checkOverLength(names));
     }
 
     @Test
@@ -38,9 +34,7 @@ public class ValidatorTest {
         Validator validator = new Validator();
 
         // when & then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            validator.checkDuplicateName(names);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> validator.checkDuplicateName(names));
     }
 
     @Test
@@ -50,8 +44,26 @@ public class ValidatorTest {
         Validator validator = new Validator();
 
         // when & then
-        Assertions.assertDoesNotThrow(() -> {
-            validator.checkDuplicateName(names);
-        });
+        Assertions.assertDoesNotThrow(() -> validator.checkDuplicateName(names));
+    }
+
+    @Test
+    public void 자동차_이름_공백_검사_예외_발생() {
+        // given
+        List<String> names = new ArrayList<>(List.of("pobi", "", "jun"));
+        Validator validator = new Validator();
+
+        // when & then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> validator.checkEmptyName(names));
+    }
+
+    @Test
+    public void 자동차_이름_공백_검사_통과() {
+        // given
+        List<String> names = new ArrayList<>(List.of("pobi", "fnd", "jun"));
+        Validator validator = new Validator();
+
+        // when & then
+        Assertions.assertDoesNotThrow(() -> validator.checkEmptyName(names));
     }
 }
