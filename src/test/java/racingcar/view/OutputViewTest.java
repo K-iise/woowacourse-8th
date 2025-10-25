@@ -46,7 +46,7 @@ public class OutputViewTest {
     }
 
     @Test
-    public void 최종_우승자_출력() {
+    public void 최종_우승자_출력_단일우승() {
         // given
         OutputView outputView = new OutputView();
         WinnerFinder winnerFinder = new WinnerFinder();
@@ -54,6 +54,24 @@ public class OutputViewTest {
         cars.get(1).addWeight(5);
 
         String expected = "최종우승자 : cobi";
+
+        // when
+        outputView.printWinner(winnerFinder.findWinners(cars));
+
+        // then
+        Assertions.assertEquals(expected, outputStream.toString());
+    }
+
+    @Test
+    public void 최종_우승자_출력_공동우승() {
+        // given
+        OutputView outputView = new OutputView();
+        WinnerFinder winnerFinder = new WinnerFinder();
+        List<Car> cars = new ArrayList<>(List.of(new Car("yun"), new Car("cobi"), new Car("james")));
+        cars.get(1).addWeight(5);
+        cars.get(2).addWeight(5);
+
+        String expected = "최종우승자 : cobi, james";
 
         // when
         outputView.printWinner(winnerFinder.findWinners(cars));
