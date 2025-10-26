@@ -6,8 +6,8 @@ import racingcar.service.Validator;
 
 public class CarGenerator {
 
-    private Validator validator;
-    private Separator separator;
+    private final Validator validator;
+    private final Separator separator;
 
     public CarGenerator(Validator validator, Separator separator) {
         this.validator = validator;
