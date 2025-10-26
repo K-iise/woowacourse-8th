@@ -17,7 +17,10 @@ public class CarGeneratorTest {
         List<Car> carList = carGenerator.createCars(cars);
 
         // then
-        Assertions.assertEquals(testList, carList);
+        for (int i = 0; i < carList.size(); i++) {
+            Assertions.assertEquals(testList.get(i).getName(), carList.get(i).getName());
+            Assertions.assertEquals(testList.get(i).getWeight(), carList.get(i).getWeight());
+        }
     }
 
     @Test
