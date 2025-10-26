@@ -8,8 +8,13 @@ public class OutputView {
 
     private final String STEP = "-";
 
+    public void printGameStart() {
+        System.out.println("\n실행 결과");
+    }
+
     public void printProcess(List<Car> cars) {
         cars.forEach(car -> System.out.println(car.getName() + " : " + STEP.repeat(car.getWeight())));
+        System.out.println();
     }
 
     public void printWinner(List<Car> cars) {

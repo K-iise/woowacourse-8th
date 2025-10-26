@@ -40,12 +40,10 @@ public class RacingController {
     }
 
     private void playGame(int attempt, List<Car> carList) {
-        System.out.println();
-        System.out.println("실행 결과");
+        outputView.printGameStart();
         for (int i = 0; i < attempt; i++) {
             racingGame.startRacing(carList);
             outputView.printProcess(carList);
-            System.out.println();
         }
     }
 

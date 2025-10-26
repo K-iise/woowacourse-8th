@@ -36,8 +36,8 @@ public class OutputViewTest {
         String expected = String.join(System.lineSeparator(),
                 "yun : ",
                 "cobi : -",
+                "",
                 "");
-
         // when
         outputView.printProcess(cars);
 
