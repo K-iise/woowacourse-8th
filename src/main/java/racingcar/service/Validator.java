@@ -12,15 +12,21 @@ public class Validator {
         }
     }
 
-    public void checkDuplicateName(List<String> name) {
-        if (name.stream().distinct().count() != name.size()) {
+    public void checkDuplicateName(List<String> names) {
+        if (names.stream().distinct().count() != names.size()) {
             throw new IllegalArgumentException("이름은 중복될 수 없습니다.");
         }
     }
 
-    public void checkEmptyName(List<String> name) {
-        if (name.stream().anyMatch(String::isBlank)) {
+    public void checkEmptyName(List<String> names) {
+        if (names.stream().anyMatch(String::isBlank)) {
             throw new IllegalArgumentException("이름은 공백이 될 수 없습니다,");
         }
+    }
+
+    public void validateAll(List<String> names) {
+        checkEmptyName(names);
+        checkDuplicateName(names);
+        checkOverLength(names);
     }
 }

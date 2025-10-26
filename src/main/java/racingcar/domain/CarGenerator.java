@@ -1,29 +1,23 @@
 package racingcar.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import racingcar.service.Separator;
 import racingcar.service.Validator;
 
 public class CarGenerator {
 
     private Validator validator;
+    private Separator separator;
 
-    public CarGenerator(Validator validator) {
+    public CarGenerator(Validator validator, Separator separator) {
         this.validator = validator;
+        this.separator = separator;
     }
 
     public List<Car> createCars(String input) {
-        List<String> carNames = List.of(input.split(","));
-        validator.checkDuplicateName(carNames);
-        validator.checkOverLength(carNames);
-        validator.checkEmptyName(carNames);
+        List<String> carNames = separator.parseCarNames(input);
+        validator.validateAll(carNames);
 
-        List<Car> carList = new ArrayList<>();
-
-        for (String carName : carNames) {
-            carList.add(new Car(carName));
-        }
-
-        return carList;
+        return carNames.stream().map(Car::new).toList();
     }
 }
