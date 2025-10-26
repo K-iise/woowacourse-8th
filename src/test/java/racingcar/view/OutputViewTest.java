@@ -53,7 +53,7 @@ public class OutputViewTest {
         List<Car> cars = new ArrayList<>(List.of(new Car("yun"), new Car("cobi")));
         cars.get(1).addWeight(5);
 
-        String expected = "최종우승자 : cobi";
+        String expected = "최종 우승자 : cobi";
 
         // when
         outputView.printWinner(winnerFinder.findWinners(cars));
@@ -71,7 +71,7 @@ public class OutputViewTest {
         cars.get(1).addWeight(5);
         cars.get(2).addWeight(5);
 
-        String expected = "최종우승자 : cobi, james";
+        String expected = "최종 우승자 : cobi, james";
 
         // when
         outputView.printWinner(winnerFinder.findWinners(cars));

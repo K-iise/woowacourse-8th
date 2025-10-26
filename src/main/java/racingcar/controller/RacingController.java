@@ -27,15 +27,33 @@ public class RacingController {
     }
 
     public void run() {
-        List<Car> carList = carGenerator.createCars(inputView.getCarName());
-        int attempt = Integer.parseInt(inputView.getTryCount());
+        List<Car> carList = createCars();
+        int attempt = getAttempt();
 
+        playGame(attempt, carList);
+        printWinner(carList);
+    }
+
+    private void printWinner(List<Car> carList) {
+        List<Car> winnerList = winnerFinder.findWinners(carList);
+        outputView.printWinner(winnerList);
+    }
+
+    private void playGame(int attempt, List<Car> carList) {
+        System.out.println();
+        System.out.println("실행 결과");
         for (int i = 0; i < attempt; i++) {
             racingGame.startRacing(carList);
             outputView.printProcess(carList);
+            System.out.println();
         }
+    }
 
-        List<Car> winnerList = winnerFinder.findWinners(carList);
-        outputView.printWinner(winnerList);
+    private int getAttempt() {
+        return Integer.parseInt(inputView.getTryCount());
+    }
+
+    private List<Car> createCars() {
+        return carGenerator.createCars(inputView.getCarName());
     }
 }
