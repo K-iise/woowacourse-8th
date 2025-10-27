@@ -86,4 +86,14 @@ public class ValidatorTest {
         // when
         Assertions.assertDoesNotThrow(() -> validator.checkInteger(attempt));
     }
+
+    @Test
+    public void 시도_횟수_0이하_예외_발생() {
+        // given
+        String attempt = "0";
+        Validator validator = new Validator();
+
+        // when
+        Assertions.assertThrows(IllegalArgumentException.class, () -> validator.checkPositive(attempt));
+    }
 }
