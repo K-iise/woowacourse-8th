@@ -37,9 +37,14 @@ public class Validator {
             throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
         }
     }
+    
+    public void validateNumberAll(String attempt) {
+        checkInteger(attempt);
+        checkPositive(attempt);
+    }
 
 
-    public void validateAll(List<String> names) {
+    public void validateNameAll(List<String> names) {
         checkEmptyName(names);
         checkDuplicateName(names);
         checkOverLength(names);

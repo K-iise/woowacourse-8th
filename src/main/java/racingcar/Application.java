@@ -18,7 +18,8 @@ public class Application {
                 new OutputView(),
                 new CarGenerator(new Validator(), new Separator()),
                 new RacingGame(new RandomGenerator()),
-                new WinnerFinder()
+                new WinnerFinder(),
+                new Validator()
         );
         racingController.run();
     }

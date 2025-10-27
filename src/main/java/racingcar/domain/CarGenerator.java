@@ -16,7 +16,7 @@ public class CarGenerator {
 
     public List<Car> createCars(String input) {
         List<String> carNames = separator.parseCarNames(input);
-        validator.validateAll(carNames);
+        validator.validateNameAll(carNames);
 
         return carNames.stream().map(Car::new).toList();
     }

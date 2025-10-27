@@ -5,6 +5,7 @@ import racingcar.domain.Car;
 import racingcar.domain.CarGenerator;
 import racingcar.domain.RacingGame;
 import racingcar.domain.WinnerFinder;
+import racingcar.service.Validator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -15,15 +16,17 @@ public class RacingController {
     private CarGenerator carGenerator;
     private RacingGame racingGame;
     private WinnerFinder winnerFinder;
+    private Validator validator;
 
     public RacingController(InputView inputView, OutputView outputView, CarGenerator carGenerator,
                             RacingGame racingGame,
-                            WinnerFinder winnerFinder) {
+                            WinnerFinder winnerFinder, Validator validator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.carGenerator = carGenerator;
         this.racingGame = racingGame;
         this.winnerFinder = winnerFinder;
+        this.validator = validator;
     }
 
     public void run() {
@@ -48,7 +51,9 @@ public class RacingController {
     }
 
     private int getAttempt() {
-        return Integer.parseInt(inputView.getTryCount());
+        String attemptInput = inputView.getTryCount();
+        validator.validateNumberAll(attemptInput);
+        return Integer.parseInt(attemptInput);
     }
 
     private List<Car> createCars() {
