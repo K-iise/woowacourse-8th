@@ -32,6 +32,13 @@ public class Validator {
         }
     }
 
+    public void checkPositive(String attempt) {
+        if (Integer.parseInt(attempt) <= 0) {
+            throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
+        }
+    }
+
+
     public void validateAll(List<String> names) {
         checkEmptyName(names);
         checkDuplicateName(names);
