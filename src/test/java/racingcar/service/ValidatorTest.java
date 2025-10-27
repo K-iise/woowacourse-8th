@@ -66,4 +66,24 @@ public class ValidatorTest {
         // when & then
         Assertions.assertDoesNotThrow(() -> validator.checkEmptyName(names));
     }
+
+    @Test
+    public void 시도_횟수_숫자_여부_예외_발생() {
+        // given
+        String attempt = "a";
+        Validator validator = new Validator();
+
+        // when
+        Assertions.assertThrows(IllegalArgumentException.class, () -> validator.checkInteger(attempt));
+    }
+
+    @Test
+    public void 시도_횟수_숫자_여부_통과() {
+        // given
+        String attempt = "5";
+        Validator validator = new Validator();
+
+        // when
+        Assertions.assertDoesNotThrow(() -> validator.checkInteger(attempt));
+    }
 }
