@@ -24,6 +24,14 @@ public class Validator {
         }
     }
 
+    public void checkInteger(String attempt) {
+        try {
+            Integer.parseInt(attempt);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자를 입력해야 합니다.");
+        }
+    }
+
     public void validateAll(List<String> names) {
         checkEmptyName(names);
         checkDuplicateName(names);
