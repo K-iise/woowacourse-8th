@@ -23,6 +23,7 @@ public class LottoPurchaseTest {
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoPurchase(amount));
+        System.out.println();
 
     }
 
