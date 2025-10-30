@@ -24,7 +24,7 @@ public class InputViewTest {
         InputView inputView = new InputView();
 
         // when
-        String lottoPrice = inputview.getLottoPrice();
+        String lottoPrice = inputView.readPurchaseAmount();
 
         // then
         Assertions.assertEquals(input, lottoPrice);
