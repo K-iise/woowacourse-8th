@@ -2,18 +2,16 @@ package lotto.domain;
 
 public class LottoPurchase {
 
-    private final int purchaseAmount;
+    private final int PURCHASE_PRICE = 1000;
 
-    public LottoPurchase(String amount){
-        try {
-            purchaseAmount = Integer.parseInt(amount);
-        } catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 숫자여야 합니다.");
-        }
+    private final int amount;
 
+    public LottoPurchase(int amount){
+        this.amount = amount;
     }
 
     public int getAmount() {
-        return purchaseAmount;
+        return this.amount;
     }
+
 }
