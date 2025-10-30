@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,5 +37,18 @@ public class LottoPurchaseTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoPurchase(amount));
     }
 
+    @Test
+    public void 로또_구입_정상_흐름_테스트(){
+        // given
+        String purchaseAmount = "15000";
+        Parser parser = new Parser();
+
+        // when
+        LottoPurchase lottoPurchase = new LottoPurchase(parser.changeInteger(purchaseAmount));
+
+        // then
+        Assertions.assertEquals(15000, lottoPurchase.getAmount());
+    }
+    
 
 }
