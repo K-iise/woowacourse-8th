@@ -48,4 +48,20 @@ public class InputViewTest {
         Assertions.assertEquals(input, winningNumbers);
     }
 
+    @Test
+    public void 보너스_번호_입력(){
+        // given
+        String input = "11";
+        InputStream fakeInputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(fakeInputStream);
+
+        InputView inputView = new InputView();
+
+        // when
+        String bonusNumber = inputView.readBonusNumber();
+
+        // then
+        Assertions.assertEquals(input, bonusNumber);
+    }
+
 }
