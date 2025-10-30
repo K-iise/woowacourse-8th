@@ -5,9 +5,11 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class InputViewTest {
+
 
     @AfterEach
     public void tearDown(){
@@ -24,9 +26,26 @@ public class InputViewTest {
         InputView inputView = new InputView();
 
         // when
-        String lottoPrice = inputView.readPurchaseAmount();
+        String lottoPurchaseAmount = inputView.readPurchaseAmount();
 
         // then
-        Assertions.assertEquals(input, lottoPrice);
+        Assertions.assertEquals(input, lottoPurchaseAmount);
     }
+
+    @Test
+    public void 당첨_번호_입력(){
+        // given
+        String input = "6,10,22,35,38,44";
+        InputStream fakeInputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(fakeInputStream);
+
+        InputView inputView = new InputView();
+
+        // when
+        String winningNumbers = inputView.readWinningNumbers();
+
+        // then
+        Assertions.assertEquals(input, winningNumbers);
+    }
+
 }
