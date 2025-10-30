@@ -17,13 +17,22 @@ public class LottoPurchaseTest {
     }
 
     @Test
-    public void 로또_구입_예외_발생() {
+    public void 로또_구입_금액_단위_예외_테스트() {
         // given
         int amount = 15500;
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoPurchase(amount));
 
+    }
+
+    @Test
+    public void 로또_구입_0원_이하_예외테스트() {
+        // given
+        int amount = 0;
+
+        // when & then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoPurchase(amount));
     }
 
 
