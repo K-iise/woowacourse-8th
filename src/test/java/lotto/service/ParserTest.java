@@ -82,9 +82,9 @@ public class ParserTest {
     }
 
     @Test
-    public void 보너스_번호_변환_범위_예외_테스트() {
+    public void 보너스_번호_변환_예외_테스트() {
         // given
-        String bonusNumber = "46";
+        String bonusNumber = "asb";
         Parser parser = new Parser();
 
         // when & then

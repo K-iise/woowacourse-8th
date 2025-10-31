@@ -19,6 +19,14 @@ public class Parser {
         return new TreeSet<>(lotteryNumber);
     }
 
+    public int parseBonusNumber(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.");
+        }
+    }
+
     private TreeSet<Integer> parseToNumbers(String input) {
         try {
             return Arrays.stream(input.split(","))
@@ -29,6 +37,7 @@ public class Parser {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다.");
         }
     }
+
 
     private void validateNumbers(TreeSet<Integer> numbers) {
         validateCount(numbers);
