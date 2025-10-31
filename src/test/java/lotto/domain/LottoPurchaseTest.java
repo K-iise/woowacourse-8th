@@ -38,13 +38,13 @@ public class LottoPurchaseTest {
     }
 
     @Test
-    public void 로또_구입_정상_흐름_테스트(){
+    public void 로또_구입_정상_흐름_테스트() {
         // given
         String purchaseAmount = "15000";
         Parser parser = new Parser();
 
         // when
-        LottoPurchase lottoPurchase = new LottoPurchase(parser.changeInteger(purchaseAmount));
+        LottoPurchase lottoPurchase = new LottoPurchase(parser.parsePurchaseAmount(purchaseAmount));
 
         // then
         Assertions.assertEquals(15000, lottoPurchase.getAmount());
