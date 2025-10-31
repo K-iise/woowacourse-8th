@@ -5,7 +5,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Parser {
-    public int changeInteger(String purchaseAmount) {
+    public int parsePurchaseAmount(String purchaseAmount) {
         try {
             return Integer.parseInt(purchaseAmount);
         } catch (IllegalArgumentException e) {
@@ -13,9 +13,8 @@ public class Parser {
         }
     }
 
-    public TreeSet<Integer> separateNumber(String input) {
+    public TreeSet<Integer> parseLotteryNumber(String input) {
         TreeSet<Integer> lotteryNumber = parseToNumbers(input);
-        validateNumbers(lotteryNumber);
         return new TreeSet<>(lotteryNumber);
     }
 
@@ -39,20 +38,4 @@ public class Parser {
     }
 
 
-    private void validateNumbers(TreeSet<Integer> numbers) {
-        validateCount(numbers);
-        numbers.forEach(this::validateRange);
-    }
-
-    private void validateRange(int number) {
-        if (number > 45 || number < 1) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 1 ~ 45 범위에 속해야 합니다.");
-        }
-    }
-
-    private void validateCount(TreeSet<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 하며 중복될 수 없습니다.");
-        }
-    }
 }

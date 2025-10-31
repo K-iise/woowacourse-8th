@@ -14,7 +14,7 @@ public class ParserTest {
         Parser parser = new Parser();
 
         // when
-        int amount = parser.changeInteger(purchaseAmount);
+        int amount = parser.parsePurchaseAmount(purchaseAmount);
 
         // then
         Assertions.assertEquals(15000, amount);
@@ -27,7 +27,7 @@ public class ParserTest {
         Parser parser = new Parser();
 
         // when & then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.changeInteger(purchaseAmount));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePurchaseAmount(purchaseAmount));
     }
 
     @Test
@@ -35,10 +35,9 @@ public class ParserTest {
         // given
         String winningNumbers = "6,10,22,35,38,44";
         Parser parser = new Parser();
-        TreeSet<Integer> lotteryNumber = new TreeSet<>();
 
         // when
-        lotteryNumber = parser.separateNumber(winningNumbers);
+        TreeSet<Integer> lotteryNumber = parser.parseLotteryNumber(winningNumbers);
 
         // then
         TreeSet<Integer> expected = new TreeSet<>(List.of(6, 10, 22, 35, 38, 44));
@@ -47,26 +46,15 @@ public class ParserTest {
     }
 
     @Test
-    public void 당첨_번호_구분_범위_예외_테스트() {
+    public void 당첨_번호_구분_예외_테스트() {
         // given
-        String errorNumbers = "6,12,33,55,27,48";
+        String lotteryNumbers = "5,a,12,33,44,13";
         Parser parser = new Parser();
-        TreeSet<Integer> lotteryNumber = new TreeSet<>();
 
-        // when & then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.separateNumber(errorNumbers));
+        // when & when
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parseLotteryNumber(lotteryNumbers));
     }
 
-    @Test
-    public void 당첨_번호_구분_중복_예외_테스트() {
-        // given
-        String errorNumbers = "5,12,44,12,33,4";
-        Parser parser = new Parser();
-        TreeSet<Integer> lotteryNumber = new TreeSet<>();
-
-        // when & then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.separateNumber(errorNumbers));
-    }
 
     @Test
     public void 보너스_번호_변환_정상_테스트() {
