@@ -49,6 +49,5 @@ public class LottoPurchaseTest {
         // then
         Assertions.assertEquals(15000, lottoPurchase.getAmount());
     }
-    
 
 }
