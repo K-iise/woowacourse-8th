@@ -42,7 +42,7 @@ public class ParserTest {
         lotteryNumber = parser.separateNumber(winningNumbers);
 
         // then
-        TreeSet<Integer> expected = new TreeSet<>(Arrays.asList(6, 10, 22, 35, 38, 44));
+        TreeSet<Integer> expected = new TreeSet<>(List.of(6, 10, 22, 35, 38, 44));
         Assertions.assertEquals(expected, lotteryNumber);
 
     }
