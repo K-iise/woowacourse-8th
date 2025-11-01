@@ -17,7 +17,8 @@ public class Lotto {
     }
 
     public Lotto() {
-        this.numbers = generateLotto();
+        List<Integer> copy = generateLotto();
+        this.numbers = sortNumber(copy);
     }
 
 
