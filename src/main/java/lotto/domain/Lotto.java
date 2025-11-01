@@ -14,6 +14,7 @@ public class Lotto {
         this.numbers = sortNumber(numbers);
     }
 
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_HAVE_SIX_NUMBERS.getMessage());
