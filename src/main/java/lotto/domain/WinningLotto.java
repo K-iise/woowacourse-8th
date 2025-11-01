@@ -23,4 +23,18 @@ public class WinningLotto {
             throw new IllegalArgumentException(ErrorMessage.BONUS_MUST_BE_UNIQUE.getMessage());
         }
     }
+
+    public int matchLotto(Lotto lotto) {
+        int count = 0;
+        for (int number : lotto.getNumbers()) {
+            if (winningNumbers.getNumbers().contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean matchBonusNumber(Lotto lotto) {
+        return lotto.getNumbers().contains(getBonusNumber());
+    }
 }
