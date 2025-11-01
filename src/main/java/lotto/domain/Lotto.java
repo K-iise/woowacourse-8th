@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -56,5 +57,12 @@ public class Lotto {
         return numbers;
     }
 
-    // TODO: 추가 기능 구현
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        for (int number : getNumbers()) {
+            joiner.add(String.valueOf(number));
+        }
+        return joiner.toString();
+    }
 }
