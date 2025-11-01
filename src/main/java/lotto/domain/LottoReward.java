@@ -17,6 +17,14 @@ public enum LottoReward {
         this.value = value;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public boolean isBonus() {
+        return bonus;
+    }
+
     public int getValue() {
         return value;
     }
