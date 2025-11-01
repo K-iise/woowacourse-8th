@@ -6,22 +6,34 @@ public class LottoPurchase {
 
     private final int amount;
 
-    public LottoPurchase(int amount){
+    private final int lottoCount;
+
+    public LottoPurchase(int amount) {
         validateAmount(amount);
         this.amount = amount;
+        this.lottoCount = purchaseLotto(amount);
     }
 
     public int getAmount() {
         return this.amount;
     }
 
-    public void validateAmount(int amount){
-        if (amount <= 0){
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
+    private void validateAmount(int amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 0원보다 커야 합니다.");
         }
-        if (amount % PURCHASE_PRICE != 0)
+        if (amount % PURCHASE_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력받아야 합니다.");
+        }
 
+    }
+
+    private int purchaseLotto(int amount) {
+        return amount / PURCHASE_PRICE;
     }
 
 
