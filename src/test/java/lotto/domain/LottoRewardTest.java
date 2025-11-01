@@ -18,6 +18,6 @@ public class LottoRewardTest {
         boolean bonus = winningLotto.matchBonusNumber(test);
 
         // when
-        Assertions.assertThat(count).isEqualTo(LottoReward.FOURTH.getRank());
+        Assertions.assertThat(count).isEqualTo(LottoReward.FOURTH.getCount());
     }
 }
