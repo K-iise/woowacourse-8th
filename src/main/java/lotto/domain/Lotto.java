@@ -16,23 +16,23 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_HAVE_SIX_NUMBERS.getMessage());
         }
     }
 
     private void validateDuplication(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBERS_MUST_BE_UNIQUE.getMessage());
         }
     }
 
     private void validateRange(List<Integer> numbers) {
-        numbers.forEach(n -> validateSingleRange(n, "[ERROR] 로또 번호는 1 ~ 45 범위에 속해야 합니다."));
+        numbers.forEach(this::validateSingleRange);
     }
 
-    private void validateSingleRange(int number, String message) {
+    private void validateSingleRange(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 

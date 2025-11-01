@@ -3,9 +3,7 @@ package lotto.domain;
 public class LottoPurchase {
 
     private final int PURCHASE_PRICE = 1000;
-
     private final int amount;
-
     private final int lottoCount;
 
     public LottoPurchase(int amount) {
@@ -24,10 +22,10 @@ public class LottoPurchase {
 
     private void validateAmount(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 0원보다 커야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_MUST_BE_POSITIVE.getMessage());
         }
         if (amount % PURCHASE_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력받아야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_MUST_BE_DIVISIBLE.getMessage());
         }
 
     }
