@@ -37,4 +37,8 @@ public class OutputView {
     public void printProfitRate(double prate) {
         System.out.printf("총 수익률은 %3.1f%%입니다.", prate);
     }
+
+    public void printError(String message) {
+        System.out.println(message);
+    }
 }

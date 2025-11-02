@@ -41,8 +41,8 @@ public class LottoService {
         return new LottoPurchase(parser.parsePurchaseAmount(input));
     }
 
-    public WinningLotto createWinningLotto(String winningInput, String bonusInput) {
-        return new WinningLotto(createLotto(winningInput), parser.parseBonusNumber(bonusInput));
+    public WinningLotto createWinningLotto(Lotto winningInput, int bonusInput) {
+        return new WinningLotto(winningInput, bonusInput);
     }
 
     public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
