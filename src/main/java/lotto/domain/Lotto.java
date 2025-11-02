@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.StringJoiner;
+import lotto.exception.ErrorMessage;
 
 public class Lotto {
     private final List<Integer> numbers;

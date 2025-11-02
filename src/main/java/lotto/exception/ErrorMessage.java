@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.exception;
 
 public enum ErrorMessage {
     AMOUNT_MUST_BE_NUMBER("[ERROR] 구입 금액은 숫자여야 합니다."),

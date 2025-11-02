@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.ErrorMessage;
+import lotto.exception.ErrorMessage;
 
 public class Parser {
-    
+
     public int parsePurchaseAmount(String purchaseAmount) {
         try {
             return Integer.parseInt(purchaseAmount);

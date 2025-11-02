@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoReward;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class LottoServiceTest {
         LottoService lottoService = new LottoService(new Parser());
         LottoResult lottoResult = new LottoResult();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
-        lottoResult.addWinningCount(LottoReward.FIFTH);
+        lottoResult.addWinningCount(Rank.FIFTH);
 
         // when
         double profit = lottoService.getProfit(lottoPurchase, lottoResult);

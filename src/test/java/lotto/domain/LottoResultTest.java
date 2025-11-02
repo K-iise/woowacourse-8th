@@ -26,12 +26,12 @@ public class LottoResultTest {
         lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
 
         // then
-        EnumMap<LottoReward, Integer> expected = new EnumMap<>(LottoReward.class);
-        expected.put(LottoReward.FIRST, 0);
-        expected.put(LottoReward.FIFTH, 1);
-        expected.put(LottoReward.SECOND, 0);
-        expected.put(LottoReward.THIRD, 0);
-        expected.put(LottoReward.FOURTH, 1);
+        EnumMap<Rank, Integer> expected = new EnumMap<>(Rank.class);
+        expected.put(Rank.FIRST, 0);
+        expected.put(Rank.FIFTH, 1);
+        expected.put(Rank.SECOND, 0);
+        expected.put(Rank.THIRD, 0);
+        expected.put(Rank.FOURTH, 1);
 
         Assertions.assertThat(lottoResult.getWinningEnumMap())
                 .containsAllEntriesOf(expected);
@@ -41,14 +41,14 @@ public class LottoResultTest {
     public void 로또_당첨_통계_초기값_0으로_초기화() {
         // given
         LottoResult lottoResult = new LottoResult();
-        EnumMap<LottoReward, Integer> rewardMap = lottoResult.getWinningEnumMap();
+        EnumMap<Rank, Integer> rewardMap = lottoResult.getWinningEnumMap();
 
         // when & then
-        Assertions.assertThat(rewardMap.get(LottoReward.FIFTH)).isEqualTo(0);
-        Assertions.assertThat(rewardMap.get(LottoReward.FOURTH)).isEqualTo(0);
-        Assertions.assertThat(rewardMap.get(LottoReward.THIRD)).isEqualTo(0);
-        Assertions.assertThat(rewardMap.get(LottoReward.SECOND)).isEqualTo(0);
-        Assertions.assertThat(rewardMap.get(LottoReward.FIRST)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(Rank.FIFTH)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(Rank.FOURTH)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(Rank.THIRD)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(Rank.SECOND)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(Rank.FIRST)).isEqualTo(0);
 
     }
 }

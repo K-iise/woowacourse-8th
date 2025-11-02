@@ -5,8 +5,8 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoReward;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 
 public class LottoService {
@@ -53,10 +53,10 @@ public class LottoService {
         return lottoResult;
     }
 
-    public LottoReward judgeRank(WinningLotto winningLotto, Lotto lotto) {
+    public Rank judgeRank(WinningLotto winningLotto, Lotto lotto) {
         int matchCount = winningLotto.matchLotto(lotto);
         boolean bonus = winningLotto.matchBonusNumber(lotto);
-        return LottoReward.rank(matchCount, bonus);
+        return Rank.rank(matchCount, bonus);
     }
 
     public double getProfit(LottoPurchase lottoPurchase, LottoResult lottoResult) {
