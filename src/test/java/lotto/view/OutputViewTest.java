@@ -58,7 +58,9 @@ public class OutputViewTest {
         lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
 
         // then
-        Assertions.assertThatCode(outputView.printWinningStat(lottoResult));
+        Assertions.assertThatCode(() -> outputView.printWinningStat(lottoResult))
+                .doesNotThrowAnyException();
+        ;
     }
 
 }
