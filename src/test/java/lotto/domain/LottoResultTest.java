@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
     @Test
-    public void 각_등수별_당첨_횟수를_카운트한다() {
+    public void 각_등수별_당첨_횟수를_추가한다() {
         // given
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 33, 23, 44));
@@ -19,16 +19,17 @@ public class LottoResultTest {
 
         LottoService lottoService = new LottoService();
         LottoResult lottoResult = new LottoResult();
+
         // when
-        lottoService.judgeRank(winningLotto, lotto1);
-        lottoService.judgeRank(winningLotto, lotto2);
+        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto1));
+        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
 
         // when
         EnumMap<LottoReward, Integer> expected = new EnumMap<>(LottoReward.class);
         expected.put(lottoService.judgeRank(winningLotto, lotto1), 1);
         expected.put(lottoService.judgeRank(winningLotto, lotto1), 1);
 
-        Assertions.assertThat(lottoResult.getWinningMap())
+        Assertions.assertThat(lottoResult.getWinningEnumMap())
                 .isEqualTo(expected);
     }
 }

@@ -1,7 +1,11 @@
 package lotto.view;
 
+import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.service.LottoService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +35,30 @@ public class OutputViewTest {
         // then
         Assertions.assertThatCode(() -> outputView.printLottos(lottos))
                 .doesNotThrowAnyException();
-        
+
+    }
+
+    @Test
+    public void 당첨_통계_출력() {
+        // given
+        OutputView outputView = new OutputView();
+        // given
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 33, 23, 44));
+
+        Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 22, 45));
+        int bonus = 7;
+        WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
+
+        LottoService lottoService = new LottoService();
+        LottoResult lottoResult = new LottoResult();
+
+        // when
+        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto1));
+        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
+
+        // then
+        Assertions.assertThatCode(outputView.printWinningStat(lottoResult));
     }
 
 }
