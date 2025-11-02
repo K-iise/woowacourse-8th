@@ -32,4 +32,19 @@ public class LottoResultTest {
         Assertions.assertThat(lottoResult.getWinningEnumMap())
                 .isEqualTo(expected);
     }
+
+    @Test
+    public void 로또_당첨_통계_초기값_0으로_초기화() {
+        // given
+        LottoResult lottoResult = new LottoResult();
+        EnumMap<LottoReward, Integer> rewardMap = lottoResult.getWinningEnumMap();
+
+        // when & then
+        Assertions.assertThat(rewardMap.get(LottoReward.FIFTH)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(LottoReward.FOURTH)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(LottoReward.THIRD)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(LottoReward.SECOND)).isEqualTo(0);
+        Assertions.assertThat(rewardMap.get(LottoReward.FIRST)).isEqualTo(0);
+
+    }
 }
