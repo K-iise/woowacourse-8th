@@ -4,17 +4,24 @@ import java.util.EnumMap;
 
 public class LottoResult {
     private final EnumMap<LottoReward, Integer> winningCount;
+    private int reward;
 
     public LottoResult() {
         this.winningCount = initializeEnumMap();
+        this.reward = 0;
     }
 
     public EnumMap<LottoReward, Integer> getWinningEnumMap() {
         return winningCount;
     }
 
+    public int getReward() {
+        return reward;
+    }
+
     public void addWinningCount(LottoReward lottoReward) {
         winningCount.put(lottoReward, winningCount.getOrDefault(lottoReward, 0) + 1);
+        reward += lottoReward.getValue();
     }
 
     private EnumMap<LottoReward, Integer> initializeEnumMap() {
