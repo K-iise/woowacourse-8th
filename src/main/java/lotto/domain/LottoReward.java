@@ -6,7 +6,7 @@ public enum LottoReward {
     THIRD(5, false, 1500000),
     FOURTH(4, false, 50000),
     FIFTH(3, false, 5000),
-    NONE(0, false, 0);
+    MISS(0, false, 0);
 
     private final int count;
     private final boolean bonus;
@@ -44,8 +44,8 @@ public enum LottoReward {
             return FOURTH;
         }
         if (matchCount == 3) {
-            return THIRD;
+            return FIFTH;
         }
-        return NONE;
+        return MISS;
     }
 }

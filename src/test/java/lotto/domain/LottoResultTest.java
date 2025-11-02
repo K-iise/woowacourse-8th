@@ -24,13 +24,16 @@ public class LottoResultTest {
         lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto1));
         lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
 
-        // when
+        // then
         EnumMap<LottoReward, Integer> expected = new EnumMap<>(LottoReward.class);
-        expected.put(lottoService.judgeRank(winningLotto, lotto1), 1);
-        expected.put(lottoService.judgeRank(winningLotto, lotto1), 1);
+        expected.put(LottoReward.FIRST, 0);
+        expected.put(LottoReward.FIFTH, 1);
+        expected.put(LottoReward.SECOND, 0);
+        expected.put(LottoReward.THIRD, 0);
+        expected.put(LottoReward.FOURTH, 1);
 
         Assertions.assertThat(lottoResult.getWinningEnumMap())
-                .isEqualTo(expected);
+                .containsAllEntriesOf(expected);
     }
 
     @Test
