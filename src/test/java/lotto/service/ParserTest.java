@@ -1,7 +1,7 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,10 +37,10 @@ public class ParserTest {
         Parser parser = new Parser();
 
         // when
-        TreeSet<Integer> lotteryNumber = parser.parseLotteryNumber(winningNumbers);
+        List<Integer> lotteryNumber = parser.parseLotteryNumber(winningNumbers);
 
         // then
-        TreeSet<Integer> expected = new TreeSet<>(List.of(6, 10, 22, 35, 38, 44));
+        List<Integer> expected = new ArrayList<>(List.of(6, 10, 22, 35, 38, 44));
         Assertions.assertEquals(expected, lotteryNumber);
 
     }

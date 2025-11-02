@@ -7,6 +7,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoService;
+import lotto.service.Parser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ public class OutputViewTest {
         // given
         OutputView outputView = new OutputView();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
-        LottoService lottoService = new LottoService();
+        LottoService lottoService = new LottoService(new Parser());
 
         // when
         Lottos lottos = new Lottos(lottoService.generateLottos(lottoPurchase.getLottoCount()));
@@ -50,7 +51,7 @@ public class OutputViewTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
-        LottoService lottoService = new LottoService();
+        LottoService lottoService = new LottoService(new Parser());
         LottoResult lottoResult = new LottoResult();
 
         // when

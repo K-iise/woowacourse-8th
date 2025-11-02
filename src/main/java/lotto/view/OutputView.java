@@ -9,27 +9,29 @@ import lotto.domain.Lottos;
 
 public class OutputView {
 
-    public static final String PURCHASE_MESSAGE = "를 구매했습니다.";
+    public static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
 
     public void printLottoPurchase(LottoPurchase lottoPurchase) {
-        System.out.println(lottoPurchase.getLottoCount() + PURCHASE_MESSAGE);
+        System.out.println("\n" + lottoPurchase.getLottoCount() + PURCHASE_MESSAGE);
     }
 
     public void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
         }
+        System.out.println();
     }
 
     public void printWinningStat(LottoResult lottoResult) {
         EnumMap<LottoReward, Integer> stat = lottoResult.getWinningEnumMap();
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---");
-        System.out.println("3개 일치 (5,000원) - " + stat.get(LottoReward.FIFTH));
-        System.out.println("4개 일치 (50,000원) - " + stat.get(LottoReward.FOURTH));
-        System.out.println("5개 일치 (1,500,000원) - " + stat.get(LottoReward.THIRD));
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + stat.get(LottoReward.SECOND));
-        System.out.println("6개 일치 (2,000,000,000원) - " + stat.get(LottoReward.FIRST));
+        System.out.println("3개 일치 (5,000원) - " + stat.get(LottoReward.FIFTH) + "개");
+        System.out.println("4개 일치 (50,000원) - " + stat.get(LottoReward.FOURTH) + "개");
+        System.out.println("5개 일치 (1,500,000원) - " + stat.get(LottoReward.THIRD) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + stat.get(LottoReward.SECOND) + "개");
+        System.out.println("6개 일치 (2,000,000,000원) - " + stat.get(LottoReward.FIRST) + "개");
     }
 
     public void printProfitRate(double prate) {

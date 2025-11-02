@@ -1,7 +1,8 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.TreeSet;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.ErrorMessage;
 
@@ -16,9 +17,9 @@ public class Parser {
         }
     }
 
-    public TreeSet<Integer> parseLotteryNumber(String input) {
-        TreeSet<Integer> lotteryNumber = parseToNumbers(input);
-        return new TreeSet<>(lotteryNumber);
+    public List<Integer> parseLotteryNumber(String input) {
+        List<Integer> lotteryNumber = parseToNumbers(input);
+        return new ArrayList<>(lotteryNumber);
     }
 
     public int parseBonusNumber(String input) {
@@ -29,12 +30,12 @@ public class Parser {
         }
     }
 
-    private TreeSet<Integer> parseToNumbers(String input) {
+    private List<Integer> parseToNumbers(String input) {
         try {
             return Arrays.stream(input.split(","))
                     .map(String::trim)
                     .map(Integer::parseInt)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_BE_NUMBER.getMessage());
         }

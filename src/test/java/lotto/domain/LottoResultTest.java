@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 import lotto.service.LottoService;
+import lotto.service.Parser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class LottoResultTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
-        LottoService lottoService = new LottoService();
+        LottoService lottoService = new LottoService(new Parser());
         LottoResult lottoResult = new LottoResult();
 
         // when
