@@ -31,9 +31,9 @@ public class LottoController {
         outputView.printLottos(lottos);
 
         // 2. 당첨 로또 생성
-        Lotto loopLotto = loopLotto();
-        int Loopbonus = loopBonus();
-        WinningLotto winningLotto = lottoService.createWinningLotto(loopLotto, Loopbonus);
+        WinningLotto winningLotto = loopWinning();
+
+        // 3. 당첨 결과 계산
         LottoResult lottoResult = lottoService.createLottoResult(lottos, winningLotto);
         outputView.printWinningStat(lottoResult);
         outputView.printProfitRate(lottoService.getProfit(lottoPurchase, lottoResult));
@@ -62,13 +62,15 @@ public class LottoController {
         }
     }
 
-    private int loopBonus() {
+    private WinningLotto loopWinning() {
+        Lotto lotto = loopLotto();
         while (true) {
             try {
-                String bonus = inputView.readBonusNumber();
+                String bonusInput = inputView.readBonusNumber();
                 System.out.println();
                 Parser parser = new Parser();
-                return parser.parseBonusNumber(bonus);
+                int bonusNumber = parser.parseBonusNumber(bonusInput);
+                return lottoService.createWinningLotto(lotto, bonusNumber);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }

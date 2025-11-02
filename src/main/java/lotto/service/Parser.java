@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.ErrorMessage;
 
 public class Parser {
-
-
+    
     public int parsePurchaseAmount(String purchaseAmount) {
         try {
             return Integer.parseInt(purchaseAmount);

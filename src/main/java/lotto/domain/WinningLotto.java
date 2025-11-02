@@ -23,6 +23,9 @@ public class WinningLotto {
         if (winningNumbers.getNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_MUST_BE_UNIQUE.getMessage());
         }
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_OUT_OF_RANGE.getMessage());
+        }
     }
 
     public int matchLotto(Lotto lotto) {
