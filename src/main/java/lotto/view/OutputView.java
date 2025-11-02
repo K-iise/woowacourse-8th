@@ -30,6 +30,9 @@ public class OutputView {
         System.out.println("5개 일치 (1,500,000원) - " + stat.get(LottoReward.THIRD));
         System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + stat.get(LottoReward.SECOND));
         System.out.println("6개 일치 (2,000,000,000원) - " + stat.get(LottoReward.FIRST));
+    }
 
+    public void printProfitRate(double prate) {
+        System.out.printf("총 수익률은 %3.1f%%입니다.", prate);
     }
 }

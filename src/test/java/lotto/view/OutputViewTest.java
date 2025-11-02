@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class OutputViewTest {
     @Test
-    public void 발행한_로또_수량_출력() {
+    public void 발행한_로또_수량_출력_테스트() {
         // given
         OutputView outputView = new OutputView();
         LottoPurchase lottoPurchase = new LottoPurchase(15000);
@@ -23,7 +23,7 @@ public class OutputViewTest {
     }
 
     @Test
-    public void 발행한_로또_번호_출력() {
+    public void 발행한_로또_번호_출력_테스트() {
         // given
         OutputView outputView = new OutputView();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
@@ -39,7 +39,7 @@ public class OutputViewTest {
     }
 
     @Test
-    public void 당첨_통계_출력() {
+    public void 당첨_통계_출력_테스트() {
         // given
         OutputView outputView = new OutputView();
         // given
@@ -61,6 +61,18 @@ public class OutputViewTest {
         Assertions.assertThatCode(() -> outputView.printWinningStat(lottoResult))
                 .doesNotThrowAnyException();
         ;
+    }
+
+    @Test
+    public void 수익률_출력_테스트() {
+        // given
+        OutputView outputView = new OutputView();
+        double profitRate = 62.5;
+
+        // when & then
+        Assertions.assertThatCode(() -> outputView.printProfitRate(profitRate))
+                .doesNotThrowAnyException();
+
     }
 
 }
