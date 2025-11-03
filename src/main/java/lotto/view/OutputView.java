@@ -24,7 +24,6 @@ public class OutputView {
 
     public void printWinningStat(LottoResult lottoResult) {
         EnumMap<Rank, Integer> stat = lottoResult.getWinningEnumMap();
-        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---");
         System.out.println("3개 일치 (5,000원) - " + stat.get(Rank.FIFTH) + "개");

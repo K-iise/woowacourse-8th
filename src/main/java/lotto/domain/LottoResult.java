@@ -31,6 +31,7 @@ public class LottoResult {
         map.put(Rank.THIRD, 0);
         map.put(Rank.SECOND, 0);
         map.put(Rank.FIRST, 0);
+        map.put(Rank.MISS, 0);
         return map;
     }
 

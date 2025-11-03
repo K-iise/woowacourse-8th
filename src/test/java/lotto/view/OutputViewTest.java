@@ -6,6 +6,7 @@ import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
+import lotto.service.LottoGenerator;
 import lotto.service.LottoService;
 import lotto.service.Parser;
 import org.assertj.core.api.Assertions;
@@ -28,10 +29,10 @@ public class OutputViewTest {
         // given
         OutputView outputView = new OutputView();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
-        LottoService lottoService = new LottoService(new Parser());
+        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
 
         // when
-        Lottos lottos = new Lottos(lottoService.generateLottos(lottoPurchase.getLottoCount()));
+        Lottos lottos = lottoService.buyLottos(lottoPurchase);
 
         // then
         Assertions.assertThatCode(() -> outputView.printLottos(lottos))
@@ -51,12 +52,12 @@ public class OutputViewTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
-        LottoService lottoService = new LottoService(new Parser());
+        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
         LottoResult lottoResult = new LottoResult();
 
         // when
-        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto1));
-        lottoResult.addWinningCount(lottoService.judgeRank(winningLotto, lotto2));
+        lottoResult.addWinningCount(winningLotto.judgeRank(lotto1));
+        lottoResult.addWinningCount(winningLotto.judgeRank(lotto2));
 
         // then
         Assertions.assertThatCode(() -> outputView.printWinningStat(lottoResult))

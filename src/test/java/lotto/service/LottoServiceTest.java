@@ -14,10 +14,10 @@ public class LottoServiceTest {
     public void 로또_발행_정상_테스트() {
         // given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
-        LottoService lottoService = new LottoService(new Parser());
+        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
 
         // when & then
-        Assertions.assertThatCode(() -> lottoService.generateLottos(lottoPurchase.getLottoCount()))
+        Assertions.assertThatCode(() -> lottoService.buyLottos(lottoPurchase))
                 .doesNotThrowAnyException();
     }
 
@@ -29,17 +29,17 @@ public class LottoServiceTest {
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         Lotto test = new Lotto(List.of(1, 3, 12, 44, 4, 43));
 
-        LottoService lottoService = new LottoService(new Parser());
+        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
 
         // when & then
-        Assertions.assertThatCode(() -> lottoService.judgeRank(winningLotto, lotto))
+        Assertions.assertThatCode(() -> winningLotto.judgeRank(lotto))
                 .doesNotThrowAnyException();
     }
 
     @Test
     public void 로또_수익률_계산_테스트() {
         // given
-        LottoService lottoService = new LottoService(new Parser());
+        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
         LottoResult lottoResult = new LottoResult();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
         lottoResult.addWinningCount(Rank.FIFTH);

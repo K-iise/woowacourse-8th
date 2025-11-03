@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.service.LottoGenerator;
 import lotto.service.LottoService;
 import lotto.service.Parser;
 import lotto.view.InputView;
@@ -11,7 +12,7 @@ public class Application {
         LottoController lottoController = new LottoController(
                 new InputView(),
                 new OutputView(),
-                new LottoService(new Parser())
+                new LottoService(new LottoGenerator(), new Parser())
         );
 
         lottoController.run();

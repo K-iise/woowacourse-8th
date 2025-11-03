@@ -18,12 +18,6 @@ public class Lotto {
         this.numbers = sortNumber(numbers);
     }
 
-    public Lotto() {
-        List<Integer> copy = generateLotto();
-        this.numbers = sortNumber(copy);
-    }
-
-
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_HAVE_SIX_NUMBERS.getMessage());
@@ -50,10 +44,6 @@ public class Lotto {
         List<Integer> sorted = new ArrayList<>(numbers);
         sorted.sort(Comparator.naturalOrder());
         return sorted;
-    }
-
-    private List<Integer> generateLotto() {
-        return Randoms.pickUniqueNumbersInRange(1, 45, 6);
     }
 
     public List<Integer> getNumbers() {

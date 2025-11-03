@@ -32,10 +32,6 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 로또_발행_정상_테스트() {
-        Assertions.assertThatCode(() -> new Lotto()).doesNotThrowAnyException();
-    }
 
 
 }

@@ -1,7 +1,9 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
@@ -11,52 +13,44 @@ import lotto.domain.WinningLotto;
 
 public class LottoService {
 
+    private final LottoGenerator lottoGenerator;
     private final Parser parser;
 
-    public LottoService(Parser parser) {
+    public LottoService(LottoGenerator lottoGenerator, Parser parser) {
+        this.lottoGenerator = lottoGenerator;
         this.parser = parser;
     }
 
-    public List<Lotto> generateLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
-        return List.copyOf(lottos);
-    }
+    public Lottos buyLottos(LottoPurchase purchase) {
+        int lottoCount = purchase.getLottoCount();
 
-    public Lottos createLottos(LottoPurchase lottoPurchase) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoPurchase.getLottoCount(); i++) {
-            lottos.add(new Lotto());
-        }
-        return new Lottos(lottos);
-    }
+        List<Lotto> purchasedLottos = new ArrayList<>();
 
-    public Lotto createLotto(String lotto) {
-        return new Lotto(parser.parseLotteryNumber(lotto));
+        for (int i = 0; i < lottoCount; i++) {
+            purchasedLottos.add(lottoGenerator.generateLotto());
+        }
+
+        return new Lottos(purchasedLottos);
     }
 
     public LottoPurchase createPurchase(String input) {
         return new LottoPurchase(parser.parsePurchaseAmount(input));
     }
 
-    public WinningLotto createWinningLotto(Lotto winningInput, int bonusInput) {
-        return new WinningLotto(winningInput, bonusInput);
+    public Lotto createWinningLottoNumbers(String input){
+        return new Lotto(parser.parseLotteryNumber(input));
     }
 
-    public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
+
+    public LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto){
+
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos.getLottos()) {
-            lottoResult.addWinningCount(judgeRank(winningLotto, lotto));
+
+        for (Lotto lotto : lottos.getLottos()){
+            Rank rank = winningLotto.judgeRank(lotto);
+            lottoResult.addWinningCount(rank);
         }
         return lottoResult;
-    }
-
-    public Rank judgeRank(WinningLotto winningLotto, Lotto lotto) {
-        int matchCount = winningLotto.matchLotto(lotto);
-        boolean bonus = winningLotto.matchBonusNumber(lotto);
-        return Rank.rank(matchCount, bonus);
     }
 
     public double getProfit(LottoPurchase lottoPurchase, LottoResult lottoResult) {
