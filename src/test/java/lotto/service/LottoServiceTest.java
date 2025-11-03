@@ -52,7 +52,7 @@ public class LottoServiceTest {
         LottoResult lottoResult = new LottoResult(fixedWinningCount, fixedReward);
 
         // when
-        double profit = lottoService.getProfit(lottoPurchase, lottoResult);
+        double profit = lottoService.calculateProfitRate(lottoPurchase, lottoResult);
 
         // then
         Assertions.assertThat(profit).isEqualTo(62.5);

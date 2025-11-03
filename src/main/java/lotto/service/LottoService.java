@@ -30,12 +30,17 @@ public class LottoService {
         return new Lottos(purchasedLottos);
     }
 
-    public LottoPurchase createPurchase(String input) {
+    public LottoPurchase parsePurchase(String input) {
         return new LottoPurchase(parser.parsePurchaseAmount(input));
     }
 
-    public Lotto createWinningLottoNumbers(String input) {
+    public Lotto parseWinningLotto(String input) {
         return new Lotto(parser.parseLotteryNumber(input));
+    }
+
+    public WinningLotto createWinningLotto(Lotto winningLotto, String bonusInput) {
+        int bonusNumber = parser.parseBonusNumber(bonusInput);
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
 
@@ -51,7 +56,7 @@ public class LottoService {
         return new LottoResult(count, totalReward);
     }
 
-    public double getProfit(LottoPurchase lottoPurchase, LottoResult lottoResult) {
+    public double calculateProfitRate(LottoPurchase lottoPurchase, LottoResult lottoResult) {
         int cost = lottoPurchase.getAmount();
         int reward = lottoResult.getReward();
         return (double) reward / cost * 100;
