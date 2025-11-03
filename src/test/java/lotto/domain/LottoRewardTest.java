@@ -13,11 +13,8 @@ public class LottoRewardTest {
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
         Lotto test = new Lotto(List.of(1, 2, 3, 6, 7, 8));
-        // then
-        int count = winningLotto.matchLotto(test);
-        boolean bonus = winningLotto.matchBonusNumber(test);
 
         // when
-        Assertions.assertThat(count).isEqualTo(Rank.FOURTH.getCount());
+        Assertions.assertThat(winningLotto.judgeRank(test)).isEqualTo(Rank.FOURTH);
     }
 }

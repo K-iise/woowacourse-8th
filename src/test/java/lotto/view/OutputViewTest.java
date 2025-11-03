@@ -6,7 +6,7 @@ import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoGenerator;
+import lotto.service.RandomLottoGenerator;
 import lotto.service.LottoService;
 import lotto.service.Parser;
 import org.assertj.core.api.Assertions;
@@ -29,7 +29,7 @@ public class OutputViewTest {
         // given
         OutputView outputView = new OutputView();
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
-        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
+        LottoService lottoService = new LottoService(new RandomLottoGenerator(), new Parser());
 
         // when
         Lottos lottos = lottoService.buyLottos(lottoPurchase);
@@ -52,7 +52,7 @@ public class OutputViewTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
-        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
+        LottoService lottoService = new LottoService(new RandomLottoGenerator(), new Parser());
         LottoResult lottoResult = new LottoResult();
 
         // when

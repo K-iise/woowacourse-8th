@@ -22,6 +22,10 @@ public enum Rank {
         return count;
     }
 
+    public boolean isBonus() {
+        return bonus;
+    }
+
     public int getValue() {
         return value;
     }

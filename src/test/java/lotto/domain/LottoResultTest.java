@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
-import lotto.service.LottoGenerator;
+import lotto.service.RandomLottoGenerator;
 import lotto.service.LottoService;
 import lotto.service.Parser;
 import org.assertj.core.api.Assertions;
@@ -19,7 +19,7 @@ public class LottoResultTest {
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
-        LottoService lottoService = new LottoService(new LottoGenerator(), new Parser());
+        LottoService lottoService = new LottoService(new RandomLottoGenerator(), new Parser());
         LottoResult lottoResult = new LottoResult();
 
         // when

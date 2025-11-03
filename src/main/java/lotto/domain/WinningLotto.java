@@ -29,13 +29,13 @@ public class WinningLotto {
         }
     }
 
-    public int matchLotto(Lotto lotto) {
+    private int matchLotto(Lotto lotto) {
         return (int) lotto.getNumbers().stream()
                 .filter(number -> winningNumbers.getNumbers().contains(number))
                 .count();
     }
 
-    public boolean matchBonusNumber(Lotto lotto) {
+    private boolean matchBonusNumber(Lotto lotto) {
         return lotto.getNumbers().contains(getBonusNumber());
     }
 
