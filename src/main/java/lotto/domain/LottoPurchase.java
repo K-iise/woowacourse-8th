@@ -4,7 +4,7 @@ import lotto.exception.ErrorMessage;
 
 public class LottoPurchase {
 
-    private final int PURCHASE_PRICE = 1000;
+    private static final int PURCHASE_PRICE = 1000;
     private final int amount;
     private final int lottoCount;
 
@@ -29,7 +29,6 @@ public class LottoPurchase {
         if (amount % PURCHASE_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.AMOUNT_MUST_BE_DIVISIBLE.getMessage());
         }
-
     }
 
     private int purchaseLotto(int amount) {

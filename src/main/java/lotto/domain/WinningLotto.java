@@ -12,7 +12,6 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-
     public Lotto getWinningNumbers() {
         return winningNumbers;
     }
@@ -31,16 +30,19 @@ public class WinningLotto {
     }
 
     public int matchLotto(Lotto lotto) {
-        int count = 0;
-        for (int number : lotto.getNumbers()) {
-            if (winningNumbers.getNumbers().contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lotto.getNumbers().stream()
+                .filter(number -> winningNumbers.getNumbers().contains(number))
+                .count();
     }
 
     public boolean matchBonusNumber(Lotto lotto) {
         return lotto.getNumbers().contains(getBonusNumber());
+    }
+
+    public Rank judgeRank(Lotto lotto){
+        int matchCount = matchLotto(lotto);
+        boolean matchBonus = matchBonusNumber(lotto);
+
+        return Rank.rank(matchCount, matchBonus);
     }
 }
