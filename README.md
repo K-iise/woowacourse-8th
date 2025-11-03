@@ -69,3 +69,59 @@
 
 ---
 
+## 🗂️ 디렉토리 구조
+
+📦 lotto  
+┣ 📂 controller  
+┃ ┗ 📄 LottoController.java  
+┣ 📂 domain  
+┃ ┣ 📄 Lotto.java  
+┃ ┣ 📄 LottoPurchase.java  
+┃ ┣ 📄 LottoResult.java  
+┃ ┣ 📄 Lottos.java  
+┃ ┣ 📄 Rank.java  
+┃ ┗ 📄 WinningLotto.java  
+┣ 📂 exception  
+┃ ┗ 📄 ErrorMessage.java  
+┣ 📂 service  
+┃ ┣ 📄 LottoGenerator.java  
+┃ ┣ 📄 LottoService.java  
+┃ ┣ 📄 Parser.java  
+┃ ┗ 📄 RandomLottoGenerator.java  
+┣ 📂 view  
+┃ ┣ 📄 InputView.java  
+┃ ┗ 📄 OutputView.java  
+┗ 📄 Application.java  
+
+---
+
+## 🧱 아키텍처 설계
+
+- **Controller**  
+  View로부터 입력을 받아 Domain과 Service를 연결하며, 전체 로또 프로그램 흐름을 제어합니다.
+    - `LottoController` : 로또 구매, 당첨 번호 확인, 결과 출력까지의 흐름 관리
+
+- **View**  
+  사용자 입력과 출력 담당
+    - `InputView` : 구매 금액, 수동 번호 입력 등 처리
+    - `OutputView` : 로또 결과 및 당첨 내역 출력
+
+- **Service**  
+  입력값 검증, 로또 생성 등 핵심 비즈니스 로직 처리
+    - `LottoService` : 로또 구매, 당첨 확인, 통계 계산
+    - `LottoGenerator` : 로또 번호 생성 인터페이스
+    - `RandomLottoGenerator` : 랜덤 로또 번호 생성 구현
+    - `Parser` : 입력 문자열을 도메인 객체로 변환
+
+- **Domain**  
+  핵심 비즈니스 객체와 상태 관리
+    - `Lotto` : 단일 로또 번호 집합
+    - `LottoPurchase` : 사용자가 구매한 로또 정보
+    - `Lottos` : 여러 로또를 모아 관리
+    - `WinningLotto` : 당첨 번호 및 보너스 번호
+    - `LottoResult` : 당첨 통계와 총 당첨금 관리
+    - `Rank` : 당첨 등수 및 상금 정보
+
+- **Exception**  
+  프로그램 예외 및 오류 메시지 관리
+    - `ErrorMessage` : 예외 상황별 메시지 정의
