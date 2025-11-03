@@ -10,6 +10,10 @@ import lotto.domain.Rank;
 public class OutputView {
 
     public static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    public static final String STAT_HEADER = "당첨 통계\n---";
+    private static final String STAT_FORMAT = "%d개 일치%s (%s원) - %d개";
+    private static final String PROFIT_FORMAT = "총 수익률은 %.1f%%입니다.";
+    private static final String BONUS_MATCH_SUFFIX = ", 보너스 볼 일치";
 
     public void printLottoPurchase(LottoPurchase lottoPurchase) {
         System.out.println("\n" + lottoPurchase.getLottoCount() + PURCHASE_MESSAGE);
@@ -24,17 +28,38 @@ public class OutputView {
 
     public void printWinningStat(LottoResult lottoResult) {
         EnumMap<Rank, Integer> stat = lottoResult.getWinningEnumMap();
-        System.out.println("당첨 통계");
-        System.out.println("---");
-        System.out.println("3개 일치 (5,000원) - " + stat.get(Rank.FIFTH) + "개");
-        System.out.println("4개 일치 (50,000원) - " + stat.get(Rank.FOURTH) + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + stat.get(Rank.THIRD) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + stat.get(Rank.SECOND) + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + stat.get(Rank.FIRST) + "개");
+
+        System.out.println(STAT_HEADER);
+
+        for (Rank rank : Rank.values()) {
+            if (rank == Rank.MISS) {
+                continue;
+            }
+
+            String description = getDescription(rank);
+            int count = stat.getOrDefault(rank, 0);
+
+            System.out.printf((STAT_FORMAT) + "\n",
+                    rank.getCount(),
+                    description,
+                    formatValue(rank.getValue()),
+                    count);
+        }
+    }
+
+    private String getDescription(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return BONUS_MATCH_SUFFIX;
+        }
+        return "";
+    }
+
+    private String formatValue(int value) {
+        return String.format("%,d", value);
     }
 
     public void printProfitRate(double prate) {
-        System.out.printf("총 수익률은 %3.1f%%입니다.", prate);
+        System.out.printf(PROFIT_FORMAT, prate);
     }
 
     public void printError(String message) {

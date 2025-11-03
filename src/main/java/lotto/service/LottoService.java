@@ -34,17 +34,16 @@ public class LottoService {
         return new LottoPurchase(parser.parsePurchaseAmount(input));
     }
 
-    public Lotto createWinningLottoNumbers(String input){
+    public Lotto createWinningLottoNumbers(String input) {
         return new Lotto(parser.parseLotteryNumber(input));
     }
 
 
-    public LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto){
-
+    public LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto) {
         EnumMap<Rank, Integer> count = new EnumMap<>(Rank.class);
         int totalReward = 0;
 
-        for (Lotto lotto : lottos.getLottos()){
+        for (Lotto lotto : lottos.getLottos()) {
             Rank rank = winningLotto.judgeRank(lotto);
             count.put(rank, count.getOrDefault(rank, 0) + 1);
             totalReward += rank.getValue();

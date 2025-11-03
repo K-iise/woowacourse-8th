@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +16,7 @@ public class Lotto {
         validateRange(numbers);
         this.numbers = sortNumber(numbers);
     }
-
+    
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_HAVE_SIX_NUMBERS.getMessage());
