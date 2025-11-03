@@ -1,6 +1,7 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
@@ -39,13 +40,16 @@ public class LottoService {
 
 
     public LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto){
-        LottoResult lottoResult = new LottoResult();
+
+        EnumMap<Rank, Integer> count = new EnumMap<>(Rank.class);
+        int totalReward = 0;
 
         for (Lotto lotto : lottos.getLottos()){
             Rank rank = winningLotto.judgeRank(lotto);
-            lottoResult.addWinningCount(rank);
+            count.put(rank, count.getOrDefault(rank, 0) + 1);
+            totalReward += rank.getValue();
         }
-        return lottoResult;
+        return new LottoResult(count, totalReward);
     }
 
     public double getProfit(LottoPurchase lottoPurchase, LottoResult lottoResult) {

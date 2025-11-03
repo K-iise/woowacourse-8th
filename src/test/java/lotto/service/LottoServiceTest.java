@@ -1,5 +1,6 @@
 package lotto.service;
 
+import java.util.EnumMap;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchase;
@@ -37,12 +38,18 @@ public class LottoServiceTest {
     }
 
     @Test
-    public void 로또_수익률_계산_테스트() {
+    public void 로또_수익률_계산_테스트_리팩토링_후() {
         // given
         LottoService lottoService = new LottoService(new RandomLottoGenerator(), new Parser());
-        LottoResult lottoResult = new LottoResult();
+
         LottoPurchase lottoPurchase = new LottoPurchase(8000);
-        lottoResult.addWinningCount(Rank.FIFTH);
+
+        EnumMap<Rank, Integer> fixedWinningCount = new EnumMap<>(Rank.class);
+        fixedWinningCount.put(Rank.FIFTH, 1);
+
+        int fixedReward = Rank.FIFTH.getValue();
+
+        LottoResult lottoResult = new LottoResult(fixedWinningCount, fixedReward);
 
         // when
         double profit = lottoService.getProfit(lottoPurchase, lottoResult);

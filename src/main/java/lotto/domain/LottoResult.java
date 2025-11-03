@@ -5,35 +5,29 @@ import java.util.EnumMap;
 
 public class LottoResult {
     private final EnumMap<Rank, Integer> winningCount;
-    private int reward;
+    private final int reward;
 
-    public LottoResult() {
-        this.winningCount = initializeEnumMap();
-        this.reward = 0;
+    public LottoResult(EnumMap<Rank, Integer> winningCount, int reward){
+        this.winningCount = initializeEnumMap(winningCount);
+        this.reward = reward;
     }
 
     public EnumMap<Rank, Integer> getWinningEnumMap() {
-        return (EnumMap<Rank, Integer>) Collections.unmodifiableMap(winningCount);
+        return new EnumMap<>(winningCount);
     }
 
     public int getReward() {
         return reward;
     }
 
-    public void addWinningCount(Rank lottoReward) {
-        winningCount.put(lottoReward, winningCount.getOrDefault(lottoReward, 0) + 1);
-        reward += lottoReward.getValue();
-    }
 
-    private EnumMap<Rank, Integer> initializeEnumMap() {
-        EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
-        map.put(Rank.FIFTH, 0);
-        map.put(Rank.FOURTH, 0);
-        map.put(Rank.THIRD, 0);
-        map.put(Rank.SECOND, 0);
-        map.put(Rank.FIRST, 0);
-        map.put(Rank.MISS, 0);
-        return map;
+    private EnumMap<Rank, Integer> initializeEnumMap(EnumMap<Rank, Integer> enumMap) {
+
+        for (Rank rank : Rank.values()){
+            int count = enumMap.getOrDefault(rank, 0);
+            enumMap.put(rank, count);
+        }
+        return new EnumMap<>(enumMap);
     }
 
 }

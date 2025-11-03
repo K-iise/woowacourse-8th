@@ -47,17 +47,18 @@ public class OutputViewTest {
         // given
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 33, 23, 44));
+        List<Lotto> lottoList = List.of(lotto1, lotto2);
+        Lottos lottos = new Lottos(lottoList);
 
         Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 22, 45));
         int bonus = 7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
         LottoService lottoService = new LottoService(new RandomLottoGenerator(), new Parser());
-        LottoResult lottoResult = new LottoResult();
 
         // when
-        lottoResult.addWinningCount(winningLotto.judgeRank(lotto1));
-        lottoResult.addWinningCount(winningLotto.judgeRank(lotto2));
+        LottoResult lottoResult = lottoService.calculateResult(lottos, winningLotto);
+
 
         // then
         Assertions.assertThatCode(() -> outputView.printWinningStat(lottoResult))
