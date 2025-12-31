@@ -1,5 +1,9 @@
 package baseball.service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Validator {
 
     private final String range = "^[0-9]*$";
@@ -10,12 +14,23 @@ public class Validator {
         }
     }
 
-    public void checkNumberInteger(String numbers){
+    public void checkNumberRange(String numbers){
         for (int i = 0; i < numbers.length(); i++) {
             int number = numbers.charAt(i) - '0';
             if (!(number > 0 && number < 9)){
                 throw new IllegalArgumentException("[Error] 입력된 숫자의 범위는 1~9여야 합니다.");
             }
+        }
+    }
+
+    public void checkNumberDuplication(String numbers){
+        Set<Integer> number = new HashSet<>();
+        for (int i = 0; i < numbers.length(); i++) {
+            int num = numbers.charAt(i) - '0';
+            number.add(num);
+        }
+        if (number.size() != 3){
+            throw new IllegalArgumentException("[Error] 입력된 수는 중복될 수 없습니다.");
         }
     }
 }
