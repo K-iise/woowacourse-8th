@@ -14,6 +14,14 @@ public class Validator {
         }
     }
 
+    public void checkNumberInteger(String numbers){
+        try{
+            int number = Integer.parseInt(numbers);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("[Error] 입력된 문자는 숫자여야 합니다.");
+        }
+    }
+
     public void checkNumberRange(String numbers){
         for (int i = 0; i < numbers.length(); i++) {
             int number = numbers.charAt(i) - '0';
