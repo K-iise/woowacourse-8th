@@ -19,7 +19,8 @@ public class Number {
 
         for (int i = 0; i < 3; i++) {
             int num = numbers.get(i);
-            if (comNumbers.get(i) == num) {
+
+            if (comNumbers.get(i).equals(num)) {
                 result.addStrike();
                 continue;
             }

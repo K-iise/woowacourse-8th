@@ -6,17 +6,20 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printResult(Result result){
-        System.out.println(result.getBall() + "볼" + " " + result.getStrike() +"스트라이크");
-    }
-
-    public void printComputer(Number number){
-        List<Integer> computer = number.getNumbers();
-
-        System.out.print("컴퓨터 숫자 : ");
-        for (Integer integer : computer) {
-            System.out.print(integer);
+    public void printProcessResult(Result result){
+        if (result.getBall() == 0 && result.getStrike() == 0){
+            System.out.println("낫싱");
         }
-        System.out.println();
+        if (result.getBall() != 0){
+            System.out.print(result.getBall() + "볼 ");
+        }
+        if (result.getStrike() != 0){
+            System.out.print(result.getStrike() + "스트라이크");
+        }
     }
+
+    public void printFinalResult(){
+        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+
 }

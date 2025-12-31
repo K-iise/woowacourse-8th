@@ -25,8 +25,8 @@ public class Validator {
     private void checkNumberRange(String numbers){
         for (int i = 0; i < numbers.length(); i++) {
             int number = numbers.charAt(i) - '0';
-            if (!(number > 0 && number < 9)){
-                throw new IllegalArgumentException("[Error] 입력된 숫자의 범위는 1~9여야 합니다.");
+            if (!(number > 0 && number < 10)){
+                throw new IllegalArgumentException("[Error] 입력된 숫자의 범위는 1 ~ 9여야 합니다.");
             }
         }
     }
