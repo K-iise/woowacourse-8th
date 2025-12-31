@@ -3,6 +3,7 @@ package baseball;
 import baseball.domain.Number;
 import baseball.service.GameService;
 import baseball.service.RandomNumberGenerator;
+import baseball.service.Separator;
 import baseball.service.Validator;
 import baseball.view.InputView;
 
@@ -21,6 +22,10 @@ public class Application {
         // 입력 검증
         Validator validator = new Validator();
         validator.validateNumber(numbers);
-        
+
+        // 사용자 숫자 등록
+        Separator separator = new Separator();
+        Number user = new Number(separator.getNumberList(numbers));
+
     }
 }
