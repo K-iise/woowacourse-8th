@@ -1,11 +1,13 @@
 package baseball;
 
 import baseball.domain.Number;
+import baseball.domain.Result;
 import baseball.service.GameService;
 import baseball.service.RandomNumberGenerator;
 import baseball.service.Separator;
 import baseball.service.Validator;
 import baseball.view.InputView;
+import baseball.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
@@ -26,6 +28,12 @@ public class Application {
         // 사용자 숫자 등록
         Separator separator = new Separator();
         Number user = new Number(separator.getNumberList(numbers));
+
+        Result result = user.compare(computer);
+        OutputView outputView = new OutputView();
+
+        outputView.printComputer(computer);
+        outputView.printResult(result);
 
     }
 }
