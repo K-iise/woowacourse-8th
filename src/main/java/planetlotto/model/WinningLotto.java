@@ -33,5 +33,5 @@ public class WinningLotto {
         }
         return result;
     }
-    
+
 }

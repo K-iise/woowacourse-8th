@@ -1,5 +1,7 @@
 package planetlotto.model;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(1, 5, false),
     SECOND(2, 4, true),
@@ -19,22 +21,9 @@ public enum Rank {
     private boolean bonus;
 
     public static Rank rank(int matchCount, boolean bonus){
-        if (matchCount == 5) {
-            return FIRST;
-        }
-        if (matchCount == 4 && bonus) {
-            return SECOND;
-        }
-        if (matchCount == 4 && !bonus) {
-            return THIRD;
-        }
-        if (matchCount == 3 && bonus) {
-            return FOURTH;
-        }
-        if (matchCount == 2 && bonus) {
-            return FIFTH;
-        }
-        return MISS;
+       return Arrays.stream(Rank.values()).filter(
+                rank -> rank.count==matchCount && rank.bonus ==bonus
+        ).findFirst().orElse(MISS);
     }
 
     public int getRanking() {
