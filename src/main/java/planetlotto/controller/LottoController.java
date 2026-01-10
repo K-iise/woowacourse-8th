@@ -5,6 +5,7 @@ import planetlotto.model.LottoGenerator;
 import planetlotto.model.Lottos;
 import planetlotto.model.PurchaseInfo;
 import planetlotto.model.WinningLotto;
+import planetlotto.util.Validator;
 import planetlotto.view.InputView;
 import planetlotto.view.OutputView;
 
@@ -36,7 +37,9 @@ public class LottoController {
         while (true) {
             try {
                 List<Integer> winningNum = InputView.askWinningLotto();
+                Validator.validateWinningNumber(winningNum);
                 int bonus = InputView.askBonusNumber();
+                Validator.validateBonusNumber(winningNum, bonus);
                 return WinningLotto.fromWinningNumberAndBonus(winningNum, bonus);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
