@@ -20,7 +20,11 @@ public class Lotto {
         return sorted;
     }
 
-    public List<Integer> generateLotto() {
+    public static List<Integer> generateLotto() {
         return Randoms.pickUniqueNumbersInRange(1, 30, 5);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

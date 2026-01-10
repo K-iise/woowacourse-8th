@@ -2,6 +2,7 @@ package planetlotto.controller;
 
 import java.util.List;
 import planetlotto.model.LottoGenerator;
+import planetlotto.model.Lottos;
 import planetlotto.model.PurchaseInfo;
 import planetlotto.view.InputView;
 import planetlotto.view.OutputView;
