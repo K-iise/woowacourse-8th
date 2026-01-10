@@ -13,15 +13,21 @@ public class LottoController {
 
 
     public void run(){
+        // 로또 구입
         PurchaseInfo lottoPurchase = loopPurchaseInfo();
 
-        List<List<Integer>> lottos = LottoGenerator.createLotto(lottoPurchase);
-        Lottos lottoList = Lottos.fromLottoList(lottos);
-        OutputView.printPurchasedLottos(lottos);
+        // 로또 생성 및 발행
+        List<List<Integer>> buyLotto = LottoGenerator.createLotto(lottoPurchase);
+        Lottos lottoList = Lottos.fromLottoList(buyLotto);
+        
+        // 생성된 로또 출력
+        OutputView.printPurchasedLottos(buyLotto);
 
+        // 당첨 로또 생성
         WinningLotto winningLotto = loopWinningLotto();
         winningLotto.JudgeRank(lottoList);
 
+        // 결과 출력
         OutputView.printResult(winningLotto.JudgeRank(lottoList));
     }
 
