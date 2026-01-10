@@ -20,4 +20,8 @@ public class PurchaseInfo {
             throw new IllegalArgumentException(ErrorCode.PRICE_ERROR.getMessage());
         }
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
