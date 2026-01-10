@@ -30,12 +30,12 @@ public class ValidatorTest {
     @Test
     public void 당첨_번호_범위_예외_테스트(){
         List<Integer> winningNumber = new ArrayList<>(List.of(33, 40, 55, 10, 1));
-        Assertions.assertThrows(IllegalArgumentException.class, ()->Validator.validateRange());
+        Assertions.assertThrows(IllegalArgumentException.class, ()->Validator.validateRange(winningNumber));
     }
 
     @Test
     public void 보너스_번호_범위_예외_테스트(){
         int bonusNumber = 44;
-        Assertions.assertThrows(IllegalArgumentException.class, ()->Validator.validateSingleRange());
+        Assertions.assertThrows(IllegalArgumentException.class, ()->Validator.validateSingleRange(bonusNumber));
     }
 }

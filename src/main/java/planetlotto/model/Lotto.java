@@ -2,6 +2,7 @@ package planetlotto.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +27,14 @@ public class Lotto {
 
     public static List<Integer> generateLotto() {
         return Randoms.pickUniqueNumbersInRange(1, 30, 5);
+    }
+
+    public int matchCount(Lotto otherLotto){
+        return (int) numbers.stream().filter(otherLotto::contains).count();
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {
