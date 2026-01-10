@@ -18,7 +18,7 @@ public enum Rank {
     private int count;
     private boolean bonus;
 
-    public static Rank ran(int matchCount, boolean bonus){
+    public static Rank rank(int matchCount, boolean bonus){
         if (matchCount == 5) {
             return FIRST;
         }
@@ -35,5 +35,9 @@ public enum Rank {
             return FIFTH;
         }
         return MISS;
+    }
+
+    public int getRanking() {
+        return ranking;
     }
 }
