@@ -8,6 +8,10 @@ import java.util.List;
 
 public class LottoGenerator {
 
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 30;
+    private static final int COUNT_NUMBER = 5;
+
     public static List<List<Integer>> createLotto(PurchaseInfo purchaseInfo){
         List<List<Integer>> lottoList = new ArrayList<>();
         for (int i = 0; i < purchaseInfo.getQuantity(); i++) {
@@ -23,6 +27,6 @@ public class LottoGenerator {
     }
 
     private static List<Integer> generateLotto() {
-        return Randoms.pickUniqueNumbersInRange(1, 30, 5);
+        return Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, COUNT_NUMBER);
     };
 }
