@@ -19,6 +19,7 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos);
 
         WinningLotto winningLotto = loopWinningLotto();
+
     }
 
     private PurchaseInfo loopPurchaseInfo(){
