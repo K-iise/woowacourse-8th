@@ -48,10 +48,20 @@ public class LottoController {
             try {
                 List<Integer> winningNum = InputView.askWinningLotto();
                 Validator.validateWinningNumber(winningNum);
-                int bonus = InputView.askBonusNumber();
-                Validator.validateBonusNumber(winningNum, bonus);
+                int bonus = loopBonus(winningNum);
                 return WinningLotto.fromWinningNumberAndBonus(winningNum, bonus);
             } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+    private int loopBonus(List<Integer> winningNumber){
+        while (true){
+            try {
+                int bonus = InputView.askBonusNumber();
+                Validator.validateBonusNumber(winningNumber, bonus);
+                return bonus;
+            } catch (IllegalArgumentException e){
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
