@@ -2,7 +2,6 @@ package planetlotto.controller;
 
 import java.util.List;
 import planetlotto.model.LottoGenerator;
-import planetlotto.model.LottoResult;
 import planetlotto.model.Lottos;
 import planetlotto.model.PurchaseInfo;
 import planetlotto.model.WinningLotto;
@@ -21,10 +20,9 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos);
 
         WinningLotto winningLotto = loopWinningLotto();
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.JudgeRank(lottoList, winningLotto);
+        winningLotto.JudgeRank(lottoList);
 
-        OutputView.printResult(lottoResult.getResult());
+        OutputView.printResult(winningLotto.JudgeRank(lottoList));
     }
 
     private PurchaseInfo loopPurchaseInfo(){

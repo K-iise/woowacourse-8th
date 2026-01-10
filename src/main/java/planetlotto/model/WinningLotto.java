@@ -2,7 +2,9 @@ package planetlotto.model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningLotto {
     private final Lotto winningNumber;
@@ -18,23 +20,18 @@ public class WinningLotto {
         return new WinningLotto(fake, bonusNumber);
     }
 
-    public int matchLotto(Lotto lotto) {
-        int count = 0;
-        for (int number : lotto.getNumbers()){
-            if (winningNumber.getNumbers().contains(number)){
-                count++;
-            }
-        }
-        return count;
-    }
+    public Map<Integer, Integer> JudgeRank(Lottos lottos) {
+        Map<Integer, Integer> result = new LinkedHashMap<>();
 
-    public boolean matchBonusNumber(Lotto lotto) {
-        for (int number : lotto.getNumbers()){
-            if (number == bonusNumber){
-                return true;
-            }
-        }
-        return false;
-    }
+        for (Lotto lotto : lottos.getLottos()) {
+            int matchCount = lotto.matchCount(winningNumber);
+            boolean matchBonus = lotto.contains(bonusNumber);
 
+            Rank rank = Rank.rank(matchCount, matchBonus);
+            int ranking = rank.getRanking();
+            result.put(ranking, result.getOrDefault(ranking, 0) + 1);
+        }
+        return result;
+    }
+    
 }
