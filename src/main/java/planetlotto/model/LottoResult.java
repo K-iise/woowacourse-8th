@@ -23,5 +23,8 @@ public class LottoResult {
             result.put(ranking, result.getOrDefault(ranking, 0) + 1);
         }
     }
-    
+
+    public Map<Integer, Integer> getResult() {
+        return result;
+    }
 }

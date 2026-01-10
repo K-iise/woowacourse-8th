@@ -23,6 +23,8 @@ public class LottoController {
         WinningLotto winningLotto = loopWinningLotto();
         LottoResult lottoResult = new LottoResult();
         lottoResult.JudgeRank(lottoList, winningLotto);
+
+        OutputView.printResult(lottoResult.getResult());
     }
 
     private PurchaseInfo loopPurchaseInfo(){
