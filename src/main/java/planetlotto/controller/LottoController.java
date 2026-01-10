@@ -4,6 +4,7 @@ import java.util.List;
 import planetlotto.model.LottoGenerator;
 import planetlotto.model.Lottos;
 import planetlotto.model.PurchaseInfo;
+import planetlotto.model.WinningLotto;
 import planetlotto.view.InputView;
 import planetlotto.view.OutputView;
 
@@ -15,6 +16,8 @@ public class LottoController {
 
         List<List<Integer>> lottos = LottoGenerator.createLotto(lottoPurchase);
         OutputView.printPurchasedLottos(lottos);
+
+        WinningLotto winningLotto = loopWinningLotto();
     }
 
     private PurchaseInfo loopPurchaseInfo(){
@@ -26,6 +29,18 @@ public class LottoController {
                 OutputView.printErrorMessage(e.getMessage());
             }
 
+        }
+    }
+
+    private WinningLotto loopWinningLotto(){
+        while (true) {
+            try {
+                List<Integer> winningNum = InputView.askWinningLotto();
+                int bonus = InputView.askBonusNumber();
+                return WinningLotto.fromWinningNumberAndBonus(winningNum, bonus);
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e.getMessage());
+            }
         }
     }
 }
