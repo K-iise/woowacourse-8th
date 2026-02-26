@@ -13,7 +13,7 @@ Gemini Canvas 미션 결과물을 관리하는 저장소입니다.
 
 **마음 쉼터**
 
-https://gemini.google.com/share/6ea4ddee32ea
+[https://gemini.google.com/share/79ad6f76a4b6]ß
 
 ### 배포 링크
 
@@ -51,7 +51,7 @@ https://gemini.google.com/share/6ea4ddee32ea
 
 ### 배포 링크
 
-https://gemini.google.com/share/e6c8c5358845
+[https://gemini.google.com/share/e6c8c5358845]
 
 ### 이 앱을 만든 이유
 
@@ -89,7 +89,7 @@ https://gemini.google.com/share/e6c8c5358845
 
 ### 배포 링크
 
-https://gemini.google.com/share/ad1843c8bd35
+[https://gemini.google.com/share/ad1843c8bd35]
 
 ### 이 앱을 만든 이유
 
@@ -125,7 +125,7 @@ https://gemini.google.com/share/ad1843c8bd35
 
 ### 앱 이름 : 우테코 회의 메이트 Pro
 
-### 페어: @
+### 페어: @realtake
 
 ### 배포 링크
 [https://gemini.google.com/share/14e4da8d29d1]
