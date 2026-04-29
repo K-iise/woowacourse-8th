@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import roomescape.model.Reservation;
+import roomescape.model.ReservationTime;
 
 @Controller
 public class ReservationController {
@@ -25,7 +26,7 @@ public class ReservationController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private RowMapper<Reservation> actorRowMapper = (resultSet, rowNum) -> {
+    private RowMapper<Reservation> reservationRowMapper = (resultSet, rowNum) -> {
         Reservation reservation = new Reservation(
                 resultSet.getLong("id"),
                 resultSet.getString("name"),
@@ -35,11 +36,20 @@ public class ReservationController {
         return reservation;
     };
 
+    private RowMapper<ReservationTime> timeRowMapper = (resultSet, rowNum) -> {
+        ReservationTime reservationTime = new ReservationTime(
+                resultSet.getLong("id"),
+                resultSet.getObject("start_at", LocalTime.class)
+        );
+        return reservationTime;
+    };
+
 
     @GetMapping("/reservations")
+    @ResponseBody
     public ResponseEntity<List<Reservation>> getReservation() {
         String sql = "select * from reservation";
-        List<Reservation> reservations = jdbcTemplate.query(sql, actorRowMapper);
+        List<Reservation> reservations = jdbcTemplate.query(sql, reservationRowMapper);
         return ResponseEntity.ok().body(reservations);
     }
 
@@ -65,6 +75,39 @@ public class ReservationController {
     @DeleteMapping("/reservations/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
         String sql = "DELETE FROM reservation WHERE id = ?;";
+        jdbcTemplate.update(sql, id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/times")
+    @ResponseBody
+    public ResponseEntity<List<ReservationTime>> getReservationTime() {
+        String sql = "select * from reservation_time";
+        List<ReservationTime> reservationTimes = jdbcTemplate.query(sql, timeRowMapper);
+        return ResponseEntity.ok().body(reservationTimes);
+    }
+
+    @PostMapping("/times")
+    @ResponseBody
+    public ResponseEntity<ReservationTime> addReservationTime(@RequestBody ReservationTime reservationTime) {
+        String sql = "insert into reservation_time(start_at) values (?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
+            ps.setObject(1, reservationTime.getStartAt());
+            return ps;
+        }, keyHolder);
+
+        Long id = keyHolder.getKey().longValue();
+        ReservationTime newReservationTime = ReservationTime.toEntity(id, reservationTime);
+
+        return ResponseEntity.ok().body(newReservationTime);
+    }
+
+    @DeleteMapping("/times/{id}")
+    public ResponseEntity<Void> deleteReservationTime(@PathVariable Long id) {
+        String sql = "delete from reservation_time where id = ?";
         jdbcTemplate.update(sql, id);
         return ResponseEntity.ok().build();
     }
