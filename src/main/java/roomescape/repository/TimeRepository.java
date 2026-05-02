@@ -3,7 +3,6 @@ package roomescape.repository;
 import java.sql.PreparedStatement;
 import java.time.LocalTime;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -13,9 +12,12 @@ import roomescape.model.ReservationTime;
 
 @Repository
 public class TimeRepository {
+    
+    private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public TimeRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     private final static RowMapper<ReservationTime> timeRowMapper = (rs, rowNum) -> new ReservationTime(
             rs.getLong("id"),
