@@ -17,14 +17,13 @@ public class TimeRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private final static RowMapper<ReservationTime> timeRowMapper = (rs, rowNum) -> new ReservationTime(
+            rs.getLong("id"),
+            rs.getObject("start_at", LocalTime.class)
+    );
+
     public List<ReservationTime> findAll() {
         String sql = "select * from reservation_time";
-        RowMapper<ReservationTime> timeRowMapper = (rs, rowNum) -> {
-            return new ReservationTime(
-                    rs.getLong("id"),
-                    rs.getObject("start_at", LocalTime.class)
-            );
-        };
         return jdbcTemplate.query(sql, timeRowMapper);
     }
 

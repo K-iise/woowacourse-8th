@@ -15,27 +15,25 @@ import roomescape.model.ReservationTime;
 
 @Repository
 public class ReservationRepository {
-    
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private static final RowMapper<Reservation> reservationMapper = (rs, rowNum) -> new Reservation(
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getObject("date", LocalDate.class),
+            new ReservationTime(
+                    rs.getLong("time_id"),
+                    rs.getObject("start_at", LocalTime.class)
+            )
+    );
 
     public List<Reservation> findAll() {
         String selectSql = "SELECT r.id, r.name, r.date, t.id as time_id, t.start_at " +
                 "FROM reservation r " +
                 "INNER JOIN reservation_time t ON r.time_id = t.id";
-
-        RowMapper<Reservation> reservationRowMapper = (rs, rowNum) -> {
-            return new Reservation(
-                    rs.getLong("id"),
-                    rs.getString("name"),
-                    rs.getObject("date", LocalDate.class),
-                    new ReservationTime(
-                            rs.getLong("time_id"),
-                            rs.getObject("start_at", LocalTime.class)
-                    )
-            );
-        };
-        return jdbcTemplate.query(selectSql, reservationRowMapper);
+        return jdbcTemplate.query(selectSql, reservationMapper);
     }
 
     public void remove(Long id) {
@@ -61,16 +59,6 @@ public class ReservationRepository {
                 "INNER JOIN reservation_time t ON r.time_id = t.id " +
                 "WHERE r.id = ?";
 
-        Reservation response = jdbcTemplate.queryForObject(selectSql, (rs, rowNum) -> new Reservation(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getObject("date", LocalDate.class),
-                new ReservationTime(
-                        rs.getLong("time_id"),
-                        rs.getObject("start_at", LocalTime.class)
-                )
-        ), id);
-
-        return response;
+        return jdbcTemplate.queryForObject(selectSql, reservationMapper, id);
     }
 }
