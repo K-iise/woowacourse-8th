@@ -25,7 +25,7 @@ public class TimeService {
     }
 
     public void removeTime(Long id) {
-        timeRepository.remove(id);
+        timeRepository.removeById(id);
     }
 
     public TimeResponse registerTime(TimeRequest timeRequest) {

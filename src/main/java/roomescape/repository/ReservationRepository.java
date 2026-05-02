@@ -38,9 +38,13 @@ public class ReservationRepository {
         return jdbcTemplate.query(selectSql, reservationMapper);
     }
 
-    public void remove(Long id) {
+    public void removeById(Long id) {
         String sql = "DELETE FROM reservation WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        int rowsAffected = jdbcTemplate.update(sql, id);
+
+        if (rowsAffected == 0) {
+            throw new IllegalArgumentException("해당 ID를 가진 데이터를 찾을 수 없습니다 : " + id);
+        }
     }
 
     public Reservation register(String name, LocalDate date, Long timeId) {

@@ -12,7 +12,7 @@ import roomescape.model.ReservationTime;
 
 @Repository
 public class TimeRepository {
-    
+
     private final JdbcTemplate jdbcTemplate;
 
     public TimeRepository(JdbcTemplate jdbcTemplate) {
@@ -29,9 +29,12 @@ public class TimeRepository {
         return jdbcTemplate.query(sql, timeRowMapper);
     }
 
-    public void remove(Long id) {
+    public void removeById(Long id) {
         String sql = "delete from reservation_time where id = ?";
-        jdbcTemplate.update(sql, id);
+        int rowsAffected = jdbcTemplate.update(sql, id);
+        if (rowsAffected == 0) {
+            throw new IllegalArgumentException("해당 ID를 가진 데이터를 찾을 수 없습니다 : " + id);
+        }
     }
 
     public ReservationTime saveTime(LocalTime startAt) {

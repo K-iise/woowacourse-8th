@@ -25,7 +25,7 @@ public class ReservationService {
     }
 
     public void removeReservation(Long id) {
-        reservationRepository.remove(id);
+        reservationRepository.removeById(id);
     }
 
     public ReservationResponse registerReservation(ReservationRequest reservationRequest) {
