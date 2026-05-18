@@ -1,6 +1,6 @@
 package roomescape.model;
 
-import roomescape.exception.BadRequestException;
+import roomescape.exception.DomainValidationException;
 import roomescape.exception.ErrorCode;
 
 public class Theme {
@@ -29,26 +29,26 @@ public class Theme {
 
     private void validateName() {
         if (name == null || name.isBlank()) {
-            throw new BadRequestException(ErrorCode.THEME_NAME_BLANK);
+            throw new DomainValidationException(ErrorCode.THEME_NAME_BLANK);
         }
 
         if (name.length() > MAX_THEME_NAME_LENGTH) {
-            throw new BadRequestException(ErrorCode.THEME_NAME_LENGTH_INVALID);
+            throw new DomainValidationException(ErrorCode.THEME_NAME_LENGTH_INVALID);
         }
     }
 
     private void validateDescription() {
         if (description == null || description.isBlank()) {
-            throw new BadRequestException(ErrorCode.THEME_DESCRIPTION_BLANK);
+            throw new DomainValidationException(ErrorCode.THEME_DESCRIPTION_BLANK);
         }
         if (description.length() > MAX_THEME_DESCRIPTION_LENGTH) {
-            throw new BadRequestException(ErrorCode.THEME_DESCRIPTION_LENGTH_INVALID);
+            throw new DomainValidationException(ErrorCode.THEME_DESCRIPTION_LENGTH_INVALID);
         }
     }
 
     private void validateUrl() {
         if (url == null || url.isBlank()) {
-            throw new BadRequestException(ErrorCode.THEME_URL_BLANK);
+            throw new DomainValidationException(ErrorCode.THEME_URL_BLANK);
         }
     }
 

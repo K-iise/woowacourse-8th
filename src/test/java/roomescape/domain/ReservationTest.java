@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import roomescape.exception.BadRequestException;
+import roomescape.exception.DomainValidationException;
 import roomescape.exception.ErrorCode;
 import roomescape.model.Reservation;
 import roomescape.model.ReservationTime;
@@ -41,7 +41,7 @@ public class ReservationTest {
                         new Reservation(1L, "홍길동란ㅇ렁나ㅓ너러안너러아러니아러니더리너디러니더라어니다ㅓ리너디ㅓ아러다러다러나더라어라더아러다어라더", LocalDate.now(),
                                 reservationTime,
                                 theme))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.RESERVATION_NAME_LENGTH_INVALID.getMessage());
     }
 
@@ -55,7 +55,7 @@ public class ReservationTest {
                         new Reservation(1L, "", LocalDate.now(),
                                 reservationTime,
                                 theme))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.RESERVATION_NAME_BLANK.getMessage());
     }
 
@@ -69,7 +69,7 @@ public class ReservationTest {
                         new Reservation(1L, "토리임", null,
                                 reservationTime,
                                 theme))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.RESERVATION_DATE_NULL.getMessage());
     }
 
@@ -81,7 +81,7 @@ public class ReservationTest {
                         new Reservation(1L, "토리임", LocalDate.now(),
                                 reservationTime,
                                 null))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.RESERVATION_THEME_NULL.getMessage());
     }
 
@@ -94,7 +94,7 @@ public class ReservationTest {
                         new Reservation(1L, "토리임", LocalDate.now(),
                                 null,
                                 theme))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.RESERVATION_TIME_NULL.getMessage());
     }
 }

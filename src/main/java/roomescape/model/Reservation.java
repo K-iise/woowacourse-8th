@@ -1,7 +1,7 @@
 package roomescape.model;
 
 import java.time.LocalDate;
-import roomescape.exception.BadRequestException;
+import roomescape.exception.DomainValidationException;
 import roomescape.exception.ErrorCode;
 
 public class Reservation {
@@ -32,28 +32,28 @@ public class Reservation {
 
     private void validateName() {
         if (name == null || name.isBlank()) {
-            throw new BadRequestException(ErrorCode.RESERVATION_NAME_BLANK);
+            throw new DomainValidationException(ErrorCode.RESERVATION_NAME_BLANK);
         }
         if (name.length() > MAX_RESERVATION_NAME_LENGTH) {
-            throw new BadRequestException(ErrorCode.RESERVATION_NAME_LENGTH_INVALID);
+            throw new DomainValidationException(ErrorCode.RESERVATION_NAME_LENGTH_INVALID);
         }
     }
 
     private void validateDate() {
         if (date == null) {
-            throw new BadRequestException(ErrorCode.RESERVATION_DATE_NULL);
+            throw new DomainValidationException(ErrorCode.RESERVATION_DATE_NULL);
         }
     }
 
     private void validateTime() {
         if (time == null) {
-            throw new BadRequestException(ErrorCode.RESERVATION_TIME_NULL);
+            throw new DomainValidationException(ErrorCode.RESERVATION_TIME_NULL);
         }
     }
 
     private void validateTheme() {
         if (theme == null) {
-            throw new BadRequestException(ErrorCode.RESERVATION_THEME_NULL);
+            throw new DomainValidationException(ErrorCode.RESERVATION_THEME_NULL);
         }
     }
 

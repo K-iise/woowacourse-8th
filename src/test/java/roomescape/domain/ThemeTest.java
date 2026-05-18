@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import roomescape.exception.BadRequestException;
+import roomescape.exception.DomainValidationException;
 import roomescape.exception.ErrorCode;
 import roomescape.model.Theme;
 
@@ -30,7 +30,7 @@ public class ThemeTest {
         String name = "dsdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf";
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, "아이의 울음소리", "https://fake.com"))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.THEME_NAME_LENGTH_INVALID.getMessage());
     }
 
@@ -40,7 +40,7 @@ public class ThemeTest {
         String name = "붉은 요람";
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, null, "https://fake.com"))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.THEME_DESCRIPTION_BLANK.getMessage());
     }
 
@@ -50,7 +50,7 @@ public class ThemeTest {
         String name = "붉은 요람";
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, "아이의 울음소리", null))
-                .isInstanceOf(BadRequestException.class)
+                .isInstanceOf(DomainValidationException.class)
                 .hasMessageContaining(ErrorCode.THEME_URL_BLANK.getMessage());
     }
 }
