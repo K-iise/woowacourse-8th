@@ -59,14 +59,12 @@ public class TimeService {
     }
 
     public TimeResponse register(TimeRequest timeRequest) {
-        if (timeRequest.startAt().getMinute() != 0) {
-            throw new UnprocessableEntityException(ErrorCode.TIME_NOT_ON_THE_HOUR);
-        }
-        if (timeRepository.existsByStartAt(timeRequest.startAt())) {
+        ReservationTime time = new ReservationTime(null, timeRequest.startAt());
+        if (timeRepository.existsByStartAt(time.getStartAt())) {
             throw new ConflictException(ErrorCode.TIME_DUPLICATED);
         }
-        ReservationTime reservationTime = timeRepository.save(timeRequest.startAt());
-        return TimeResponse.from(reservationTime);
+        ReservationTime saved = timeRepository.save(time.getStartAt());
+        return TimeResponse.from(saved);
     }
 
     private boolean isPastTime(LocalDate date, ReservationTime time) {

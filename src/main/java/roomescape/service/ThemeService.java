@@ -28,11 +28,12 @@ public class ThemeService {
     }
 
     public ThemeResponse register(ThemeRequest themeRequest) {
-        if (themeRepository.existsByName(themeRequest.name())) {
+        Theme theme = new Theme(null, themeRequest.name(), themeRequest.description(), themeRequest.url());
+        if (themeRepository.existsByName(theme.getName())) {
             throw new ConflictException(ErrorCode.THEME_DUPLICATED);
         }
-        Theme theme = themeRepository.save(themeRequest.name(), themeRequest.description(), themeRequest.url());
-        return ThemeResponse.from(theme);
+        Theme saved = themeRepository.save(theme.getName(), theme.getDescription(), theme.getUrl());
+        return ThemeResponse.from(saved);
     }
 
     public void removeById(Long id) {
