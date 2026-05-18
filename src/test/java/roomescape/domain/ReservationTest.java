@@ -42,7 +42,8 @@ public class ReservationTest {
                                 reservationTime,
                                 theme))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_NAME_LENGTH_INVALID.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NAME_LENGTH_INVALID);
     }
 
     @Test
@@ -56,7 +57,8 @@ public class ReservationTest {
                                 reservationTime,
                                 theme))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_NAME_BLANK.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NAME_BLANK);
     }
 
     @Test
@@ -70,7 +72,8 @@ public class ReservationTest {
                                 reservationTime,
                                 theme))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_DATE_NULL.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_DATE_NULL);
     }
 
     @Test
@@ -82,7 +85,8 @@ public class ReservationTest {
                                 reservationTime,
                                 null))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_THEME_NULL.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_THEME_NULL);
     }
 
     @Test
@@ -95,6 +99,7 @@ public class ReservationTest {
                                 null,
                                 theme))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_TIME_NULL.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_TIME_NULL);
     }
 }

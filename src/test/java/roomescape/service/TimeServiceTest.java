@@ -24,7 +24,8 @@ public class TimeServiceTest {
         // then
         Assertions.assertThatThrownBy(() -> timeService.removeById(-1L))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.TIME_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.TIME_NOT_FOUND);
 
     }
 
@@ -46,7 +47,8 @@ public class TimeServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> timeService.register(timeRequest))
                 .isInstanceOf(ConflictException.class)
-                .hasMessageContaining(ErrorCode.TIME_DUPLICATED.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.TIME_DUPLICATED);
     }
 
     @Test
@@ -54,6 +56,7 @@ public class TimeServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> timeService.removeById(1L))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.TIME_HAS_RESERVATIONS.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.TIME_HAS_RESERVATIONS);
     }
 }

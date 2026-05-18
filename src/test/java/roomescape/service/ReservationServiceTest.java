@@ -28,7 +28,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.removeById(-1L))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NOT_FOUND);
     }
 
     @Test
@@ -40,7 +41,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.register(reservationRequest))
                 .isInstanceOf(ConflictException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_DUPLICATED.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_DUPLICATED);
     }
 
     @Test
@@ -60,7 +62,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.register(reservationRequest))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_PAST_DATE.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_PAST_DATE);
     }
 
     @Test
@@ -70,7 +73,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.register(reservationRequest))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.TIME_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.TIME_NOT_FOUND);
     }
 
     @Test
@@ -80,7 +84,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.register(reservationRequest))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.THEME_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_NOT_FOUND);
     }
 
     @Test
@@ -106,7 +111,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.cancelByIdAndName(reservationId, otherName))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_NOT_OWNER.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NOT_OWNER);
     }
 
     @Test
@@ -119,7 +125,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.cancelByIdAndName(reservationId, username))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_PAST_UPDATE.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_PAST_UPDATE);
     }
 
     @Test
@@ -142,7 +149,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.update(-1L, "토리", updateRequest))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NOT_FOUND);
     }
 
     @Test
@@ -153,7 +161,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.update(1L, "윤기", updateRequest))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_PAST_UPDATE.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_PAST_UPDATE);
     }
 
     @Test
@@ -168,7 +177,8 @@ public class ReservationServiceTest {
         // when
         Assertions.assertThatThrownBy(() -> reservationService.update(id, "토리", updateRequest))
                 .isInstanceOf(ConflictException.class)
-                .hasMessageContaining(ErrorCode.RESERVATION_TIME_ALREADY_BOOKED.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_TIME_ALREADY_BOOKED);
     }
 
     @Test

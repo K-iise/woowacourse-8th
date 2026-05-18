@@ -31,7 +31,8 @@ public class ThemeTest {
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, "아이의 울음소리", "https://fake.com"))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.THEME_NAME_LENGTH_INVALID.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_NAME_LENGTH_INVALID);
     }
 
     @Test
@@ -41,7 +42,8 @@ public class ThemeTest {
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, null, "https://fake.com"))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.THEME_DESCRIPTION_BLANK.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_DESCRIPTION_BLANK);
     }
 
     @Test
@@ -51,6 +53,7 @@ public class ThemeTest {
         Assertions.assertThatThrownBy(() ->
                         new Theme(1L, name, "아이의 울음소리", null))
                 .isInstanceOf(DomainValidationException.class)
-                .hasMessageContaining(ErrorCode.THEME_URL_BLANK.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_URL_BLANK);
     }
 }

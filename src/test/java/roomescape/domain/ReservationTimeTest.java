@@ -26,6 +26,7 @@ public class ReservationTimeTest {
         Assertions.assertThatThrownBy(() ->
                         new ReservationTime((long) 1, LocalTime.of(12, 30)))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.TIME_NOT_ON_THE_HOUR.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.TIME_NOT_ON_THE_HOUR);
     }
 }

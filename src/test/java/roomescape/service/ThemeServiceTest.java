@@ -42,7 +42,8 @@ public class ThemeServiceTest {
         // then
         Assertions.assertThatThrownBy(() -> themeService.removeById(-1L))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(ErrorCode.THEME_NOT_FOUND.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_NOT_FOUND);
     }
 
     @Test
@@ -57,7 +58,8 @@ public class ThemeServiceTest {
         // then
         Assertions.assertThatThrownBy(() -> themeService.removeById(1L))
                 .isInstanceOf(UnprocessableEntityException.class)
-                .hasMessageContaining(ErrorCode.THEME_HAS_RESERVATIONS.getMessage());
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.THEME_HAS_RESERVATIONS);
 
     }
 
