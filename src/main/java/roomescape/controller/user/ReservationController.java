@@ -1,6 +1,7 @@
 package roomescape.controller.user;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import java.net.URI;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -36,20 +37,20 @@ public class ReservationController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ReservationResponse>> readAllByName(@RequestParam String username) {
+    public ResponseEntity<List<ReservationResponse>> readAllByName(@NotBlank @RequestParam String username) {
         List<ReservationResponse> reservationResponses = reservationService.readAllByName(username);
         return ResponseEntity.ok(reservationResponses);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> cancelByIdAndName(@PathVariable Long id, @RequestParam String username) {
+    public ResponseEntity<Void> cancelByIdAndName(@PathVariable Long id, @NotBlank @RequestParam String username) {
         reservationService.cancelByIdAndName(id, username);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping(value = "/{id}")
     public ResponseEntity<ReservationResponse> update(@PathVariable Long id,
-                                                      @RequestParam String username,
+                                                      @NotBlank @RequestParam String username,
                                                       @Valid @RequestBody ReservationUpdateRequest reservationUpdateRequest) {
         ReservationResponse reservationResponse = reservationService.update(id, username, reservationUpdateRequest);
         return ResponseEntity.ok().body(reservationResponse);

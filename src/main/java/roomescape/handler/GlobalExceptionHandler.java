@@ -9,11 +9,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import roomescape.dto.ErrorResponse;
 import roomescape.dto.FieldErrorResponse;
-import roomescape.exception.BadRequestException;
 import roomescape.exception.ConflictException;
+import roomescape.exception.DomainValidationException;
 import roomescape.exception.ErrorCode;
 import roomescape.exception.NotFoundException;
 import roomescape.exception.UnprocessableEntityException;
@@ -60,6 +61,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ErrorResponse> handleHandlerMethodValidationException(
+            HandlerMethodValidationException e, HttpServletRequest request
+    ) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "INVALID_PARAMETER_CONSTRAINT", request.getRequestURI(), "요청 파라미터의 형식이 유효하지 않습니다."
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e, HttpServletRequest request) {
         ErrorCode error = e.getErrorCode();
@@ -88,8 +99,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorResponse);
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException e, HttpServletRequest request) {
+    @ExceptionHandler(DomainValidationException.class)
+    public ResponseEntity<ErrorResponse> handleDomainValidationException(DomainValidationException e,
+                                                                         HttpServletRequest request) {
         ErrorCode error = e.getErrorCode();
         ErrorResponse errorResponse = new ErrorResponse(
                 error.getCode(), request.getRequestURI(), error.getMessage()
