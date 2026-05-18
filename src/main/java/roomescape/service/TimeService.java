@@ -13,16 +13,20 @@ import roomescape.exception.NotFoundException;
 import roomescape.exception.UnprocessableEntityException;
 import roomescape.model.ReservationTime;
 import roomescape.repository.ReservationRepository;
+import roomescape.repository.ThemeRepository;
 import roomescape.repository.TimeRepository;
 
 @Service
 public class TimeService {
 
     private final TimeRepository timeRepository;
+    private final ThemeRepository themeRepository;
     private final ReservationRepository reservationRepository;
 
-    public TimeService(TimeRepository timeRepository, ReservationRepository reservationRepository) {
+    public TimeService(TimeRepository timeRepository, ThemeRepository themeRepository,
+                       ReservationRepository reservationRepository) {
         this.timeRepository = timeRepository;
+        this.themeRepository = themeRepository;
         this.reservationRepository = reservationRepository;
     }
 
@@ -34,6 +38,9 @@ public class TimeService {
     }
 
     public List<TimeResponse> readAllByThemeIdAndDate(Long themeId, LocalDate date) {
+        themeRepository.findById(themeId).orElseThrow(
+                () -> new NotFoundException(ErrorCode.THEME_NOT_FOUND)
+        );
         List<ReservationTime> times = timeRepository.findAllByThemeIdAndDate(themeId, date);
         return times.stream()
                 .filter(time -> !isPastTime(date, time))
