@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import roomescape.dto.ReservationRequest;
 import roomescape.dto.ReservationResponse;
 import roomescape.dto.ReservationUpdateRequest;
@@ -20,6 +21,7 @@ import roomescape.repository.ThemeRepository;
 import roomescape.repository.TimeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
@@ -47,12 +49,14 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void removeById(Long id) {
         Reservation reservation = getReservation(id);
         validatePastUpdate(reservation.getDate(), reservation.getTime());
         reservationRepository.deleteById(id);
     }
 
+    @Transactional
     public void cancelByIdAndName(Long id, String username) {
         Reservation reservation = getReservation(id);
         validateOwner(username, reservation);
@@ -66,6 +70,7 @@ public class ReservationService {
         }
     }
 
+    @Transactional
     public ReservationResponse register(ReservationRequest reservationRequest) {
         ReservationTime reservationTime = getReservationTime(reservationRequest.timeId());
         Theme theme = getTheme(reservationRequest.themeId());
@@ -79,6 +84,7 @@ public class ReservationService {
         return ReservationResponse.from(savedReservation);
     }
 
+    @Transactional
     public ReservationResponse update(Long id, String username, ReservationUpdateRequest reservationUpdateRequest) {
         Reservation reservation = getReservation(id);
         validateOwner(username, reservation);
@@ -143,5 +149,4 @@ public class ReservationService {
             throw new ConflictException(ErrorCode.RESERVATION_TIME_ALREADY_BOOKED);
         }
     }
-
 }

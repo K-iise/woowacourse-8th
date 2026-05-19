@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import roomescape.dto.TimeRequest;
 import roomescape.dto.TimeResponse;
 import roomescape.exception.ConflictException;
@@ -17,6 +18,7 @@ import roomescape.repository.ThemeRepository;
 import roomescape.repository.TimeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class TimeService {
 
     private final TimeRepository timeRepository;
@@ -48,6 +50,7 @@ public class TimeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void removeById(Long id) {
         timeRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(ErrorCode.TIME_NOT_FOUND)
@@ -58,6 +61,7 @@ public class TimeService {
         timeRepository.deleteById(id);
     }
 
+    @Transactional
     public TimeResponse register(TimeRequest timeRequest) {
         ReservationTime time = new ReservationTime(null, timeRequest.startAt());
         if (timeRepository.existsByStartAt(time.getStartAt())) {

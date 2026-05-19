@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import roomescape.dto.ThemeRequest;
 import roomescape.dto.ThemeResponse;
 import roomescape.exception.ConflictException;
@@ -15,6 +16,7 @@ import roomescape.repository.ReservationRepository;
 import roomescape.repository.ThemeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ThemeService {
 
     private static final int RANKS_LIMIT_COUNT = 10;
@@ -27,6 +29,7 @@ public class ThemeService {
         this.reservationRepository = reservationRepository;
     }
 
+    @Transactional
     public ThemeResponse register(ThemeRequest themeRequest) {
         Theme theme = new Theme(null, themeRequest.name(), themeRequest.description(), themeRequest.url());
         if (themeRepository.existsByName(theme.getName())) {
@@ -36,6 +39,7 @@ public class ThemeService {
         return ThemeResponse.from(saved);
     }
 
+    @Transactional
     public void removeById(Long id) {
         themeRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(ErrorCode.THEME_NOT_FOUND)
