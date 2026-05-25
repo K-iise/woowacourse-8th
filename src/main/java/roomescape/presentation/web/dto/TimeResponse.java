@@ -1,11 +1,11 @@
 package roomescape.presentation.web.dto;
 
 import java.time.LocalTime;
-import roomescape.domain.model.ReservationTime;
+import roomescape.application.dto.TimeResult;
 
 public record TimeResponse(Long id, LocalTime startAt) {
 
-    public static TimeResponse from(ReservationTime reservationTime) {
-        return new TimeResponse(reservationTime.getId(), reservationTime.getStartAt());
+    public static TimeResponse from(TimeResult result) {
+        return new TimeResponse(result.id(), result.startAt());
     }
 }

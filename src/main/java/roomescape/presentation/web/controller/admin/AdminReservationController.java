@@ -22,7 +22,9 @@ public class AdminReservationController {
 
     @GetMapping
     public ResponseEntity<List<ReservationResponse>> read() {
-        List<ReservationResponse> reservations = reservationService.read();
+        List<ReservationResponse> reservations = reservationService.read().stream()
+                .map(ReservationResponse::from)
+                .toList();
         return ResponseEntity.ok().body(reservations);
     }
 

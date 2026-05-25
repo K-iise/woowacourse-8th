@@ -25,7 +25,7 @@ public class AdminThemeController {
 
     @PostMapping
     public ResponseEntity<ThemeResponse> register(@Valid @RequestBody ThemeRequest themeRequest) {
-        ThemeResponse themeResponse = themeService.register(themeRequest);
+        ThemeResponse themeResponse = ThemeResponse.from(themeService.register(themeRequest.toCommand()));
         return ResponseEntity.created(URI.create("/themes/" + themeResponse.id()))
                 .body(themeResponse);
     }

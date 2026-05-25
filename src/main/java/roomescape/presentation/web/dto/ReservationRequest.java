@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import roomescape.application.dto.ReservationCommand;
 
 public record ReservationRequest(
         @NotBlank(message = "예약자 이름은 빈값일 수 없습니다.")
@@ -20,4 +21,8 @@ public record ReservationRequest(
 
         @NotNull(message = "예약 테마는 필수입니다.")
         Long themeId) {
+
+    public ReservationCommand toCommand() {
+        return new ReservationCommand(name, date, timeId, themeId);
+    }
 }

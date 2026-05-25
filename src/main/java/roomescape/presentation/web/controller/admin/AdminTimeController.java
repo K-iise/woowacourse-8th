@@ -27,7 +27,7 @@ public class AdminTimeController {
 
     @PostMapping
     public ResponseEntity<TimeResponse> register(@Valid @RequestBody TimeRequest timeRequest) {
-        TimeResponse timeResponse = timeService.register(timeRequest);
+        TimeResponse timeResponse = TimeResponse.from(timeService.register(timeRequest.toCommand()));
         return ResponseEntity.created(URI.create("/times/" + timeResponse.id())).body(timeResponse);
     }
 
@@ -39,7 +39,9 @@ public class AdminTimeController {
 
     @GetMapping
     public ResponseEntity<List<TimeResponse>> readAll() {
-        List<TimeResponse> reservationTimes = timeService.readAll();
+        List<TimeResponse> reservationTimes = timeService.readAll().stream()
+                .map(TimeResponse::from)
+                .toList();
         return ResponseEntity.ok().body(reservationTimes);
     }
 }

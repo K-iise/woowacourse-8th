@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
+import roomescape.application.dto.ThemeResult;
 import roomescape.application.service.ThemeService;
 import roomescape.domain.exception.ErrorCode;
 import roomescape.domain.exception.NotFoundException;
 import roomescape.domain.exception.UnprocessableEntityException;
 import roomescape.domain.model.ReservationTime;
 import roomescape.domain.model.Theme;
-import roomescape.presentation.web.dto.ThemeResponse;
 import roomescape.infrastructure.persistence.repository.ReservationRepository;
 import roomescape.infrastructure.persistence.repository.ThemeRepository;
 import roomescape.infrastructure.persistence.repository.TimeRepository;
@@ -82,12 +82,12 @@ public class ThemeServiceTest {
         reservationRepository.save("제외2", LocalDate.of(2026, 5, 15), 1L, 3L, reservationTime, thirdTheme);
 
         // when
-        List<ThemeResponse> result =
+        List<ThemeResult> result =
                 themeService.readRanks(LocalDate.of(2026, 5, 15));
 
         // then
         assertThat(result)
-                .extracting(ThemeResponse::id)
+                .extracting(ThemeResult::id)
                 .contains(1L)
                 .doesNotContain(2L, 3L);
     }

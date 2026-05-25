@@ -1,11 +1,10 @@
 package roomescape.presentation.web.dto;
 
-import roomescape.domain.model.Theme;
+import roomescape.application.dto.ThemeResult;
 
 public record ThemeResponse(Long id, String name, String description, String url) {
 
-    public static ThemeResponse from(Theme theme) {
-        return new ThemeResponse(theme.getId(), theme.getName(), theme.getDescription(), theme.getUrl());
+    public static ThemeResponse from(ThemeResult result) {
+        return new ThemeResponse(result.id(), result.name(), result.description(), result.url());
     }
-
 }

@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import roomescape.application.dto.TimeCommand;
+import roomescape.application.dto.TimeResult;
 import roomescape.domain.exception.ConflictException;
 import roomescape.domain.exception.ErrorCode;
 import roomescape.domain.exception.NotFoundException;
 import roomescape.domain.exception.UnprocessableEntityException;
 import roomescape.domain.model.ReservationTime;
-import roomescape.presentation.web.dto.TimeRequest;
-import roomescape.presentation.web.dto.TimeResponse;
 import roomescape.infrastructure.persistence.repository.ReservationRepository;
 import roomescape.infrastructure.persistence.repository.ThemeRepository;
 import roomescape.infrastructure.persistence.repository.TimeRepository;
@@ -32,21 +32,21 @@ public class TimeService {
         this.reservationRepository = reservationRepository;
     }
 
-    public List<TimeResponse> readAll() {
+    public List<TimeResult> readAll() {
         List<ReservationTime> times = timeRepository.findAll();
         return times.stream()
-                .map(TimeResponse::from)
+                .map(TimeResult::from)
                 .collect(Collectors.toList());
     }
 
-    public List<TimeResponse> readAllByThemeIdAndDate(Long themeId, LocalDate date) {
+    public List<TimeResult> readAllByThemeIdAndDate(Long themeId, LocalDate date) {
         themeRepository.findById(themeId).orElseThrow(
                 () -> new NotFoundException(ErrorCode.THEME_NOT_FOUND)
         );
         List<ReservationTime> times = timeRepository.findAllByThemeIdAndDate(themeId, date);
         return times.stream()
                 .filter(time -> !isPastTime(date, time))
-                .map(TimeResponse::from)
+                .map(TimeResult::from)
                 .collect(Collectors.toList());
     }
 
@@ -62,13 +62,13 @@ public class TimeService {
     }
 
     @Transactional
-    public TimeResponse register(TimeRequest timeRequest) {
-        ReservationTime time = new ReservationTime(null, timeRequest.startAt());
+    public TimeResult register(TimeCommand command) {
+        ReservationTime time = new ReservationTime(null, command.startAt());
         if (timeRepository.existsByStartAt(time.getStartAt())) {
             throw new ConflictException(ErrorCode.TIME_DUPLICATED);
         }
         ReservationTime saved = timeRepository.save(time.getStartAt());
-        return TimeResponse.from(saved);
+        return TimeResult.from(saved);
     }
 
     private boolean isPastTime(LocalDate date, ReservationTime time) {

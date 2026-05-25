@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import roomescape.application.dto.ReservationCommand;
+import roomescape.application.dto.ReservationResult;
+import roomescape.application.dto.ReservationUpdateCommand;
 import roomescape.domain.exception.ConflictException;
 import roomescape.domain.exception.ErrorCode;
 import roomescape.domain.exception.NotFoundException;
@@ -13,9 +16,6 @@ import roomescape.domain.exception.UnprocessableEntityException;
 import roomescape.domain.model.Reservation;
 import roomescape.domain.model.ReservationTime;
 import roomescape.domain.model.Theme;
-import roomescape.presentation.web.dto.ReservationRequest;
-import roomescape.presentation.web.dto.ReservationResponse;
-import roomescape.presentation.web.dto.ReservationUpdateRequest;
 import roomescape.infrastructure.persistence.repository.ReservationRepository;
 import roomescape.infrastructure.persistence.repository.ThemeRepository;
 import roomescape.infrastructure.persistence.repository.TimeRepository;
@@ -35,17 +35,17 @@ public class ReservationService {
         this.themeRepository = themeRepository;
     }
 
-    public List<ReservationResponse> read() {
+    public List<ReservationResult> read() {
         List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream()
-                .map(ReservationResponse::from)
+                .map(ReservationResult::from)
                 .collect(Collectors.toList());
     }
 
-    public List<ReservationResponse> readAllByName(String name) {
+    public List<ReservationResult> readAllByName(String name) {
         List<Reservation> reservations = reservationRepository.findAllByName(name);
         return reservations.stream()
-                .map(ReservationResponse::from)
+                .map(ReservationResult::from)
                 .collect(Collectors.toList());
     }
 
@@ -71,33 +71,32 @@ public class ReservationService {
     }
 
     @Transactional
-    public ReservationResponse register(ReservationRequest reservationRequest) {
-        ReservationTime reservationTime = getReservationTime(reservationRequest.timeId());
-        Theme theme = getTheme(reservationRequest.themeId());
+    public ReservationResult register(ReservationCommand command) {
+        ReservationTime reservationTime = getReservationTime(command.timeId());
+        Theme theme = getTheme(command.themeId());
 
-        validatePastRegister(reservationRequest.date(), reservationTime);
-        validateDuplicate(reservationRequest.date(), reservationRequest.timeId(), reservationRequest.themeId());
+        validatePastRegister(command.date(), reservationTime);
+        validateDuplicate(command.date(), command.timeId(), command.themeId());
 
-        Reservation savedReservation = reservationRepository.save(reservationRequest.name(), reservationRequest.date(),
-                reservationRequest.timeId(),
-                reservationRequest.themeId(), reservationTime, theme);
-        return ReservationResponse.from(savedReservation);
+        Reservation savedReservation = reservationRepository.save(command.name(), command.date(),
+                command.timeId(),
+                command.themeId(), reservationTime, theme);
+        return ReservationResult.from(savedReservation);
     }
 
     @Transactional
-    public ReservationResponse update(Long id, String username, ReservationUpdateRequest reservationUpdateRequest) {
+    public ReservationResult update(Long id, String username, ReservationUpdateCommand command) {
         Reservation reservation = getReservation(id);
         validateOwner(username, reservation);
         validatePastUpdate(reservation.getDate(), reservation.getTime());
 
-        ReservationTime reservationTime = getReservationTime(reservationUpdateRequest.timeId());
-        validatePastUpdate(reservationUpdateRequest.date(), reservationTime);
-        validateDuplicateExceptSelf(reservationUpdateRequest.date(), reservationUpdateRequest.timeId(),
+        ReservationTime reservationTime = getReservationTime(command.timeId());
+        validatePastUpdate(command.date(), reservationTime);
+        validateDuplicateExceptSelf(command.date(), command.timeId(),
                 reservation.getTheme().getId(), reservation.getId());
 
-        Reservation updated = reservationRepository.update(id, reservationUpdateRequest.date(),
-                reservationUpdateRequest.timeId());
-        return ReservationResponse.from(updated);
+        Reservation updated = reservationRepository.update(id, command.date(), command.timeId());
+        return ReservationResult.from(updated);
     }
 
     private Reservation getReservation(Long id) {

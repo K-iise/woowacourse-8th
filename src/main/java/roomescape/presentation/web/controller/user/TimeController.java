@@ -23,7 +23,9 @@ public class TimeController {
     @GetMapping
     public ResponseEntity<List<TimeResponse>> readAllByThemeIdAndDate(@RequestParam Long themeId,
                                                                       @RequestParam LocalDate date) {
-        List<TimeResponse> reservationTimes = timeService.readAllByThemeIdAndDate(themeId, date);
+        List<TimeResponse> reservationTimes = timeService.readAllByThemeIdAndDate(themeId, date).stream()
+                .map(TimeResponse::from)
+                .toList();
         return ResponseEntity.ok().body(reservationTimes);
     }
 }

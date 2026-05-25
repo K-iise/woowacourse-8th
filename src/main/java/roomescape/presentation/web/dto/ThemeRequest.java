@@ -2,6 +2,7 @@ package roomescape.presentation.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import roomescape.application.dto.ThemeCommand;
 
 public record ThemeRequest(
         @NotBlank(message = "테마 이름은 빈값일 수 없습니다.")
@@ -14,4 +15,8 @@ public record ThemeRequest(
 
         @NotBlank(message = "테마 URL은 빈값일 수 없습니다.")
         String url) {
+
+    public ThemeCommand toCommand() {
+        return new ThemeCommand(name, description, url);
+    }
 }

@@ -21,13 +21,17 @@ public class ThemeController {
 
     @GetMapping
     public ResponseEntity<List<ThemeResponse>> readAll() {
-        List<ThemeResponse> themeResponses = themeService.readAll();
+        List<ThemeResponse> themeResponses = themeService.readAll().stream()
+                .map(ThemeResponse::from)
+                .toList();
         return ResponseEntity.ok().body(themeResponses);
     }
 
     @GetMapping("/ranks")
     public ResponseEntity<List<ThemeResponse>> readRanks() {
-        List<ThemeResponse> themeResponses = themeService.readRanks(LocalDate.now());
+        List<ThemeResponse> themeResponses = themeService.readRanks(LocalDate.now()).stream()
+                .map(ThemeResponse::from)
+                .toList();
         return ResponseEntity.ok().body(themeResponses);
     }
 }

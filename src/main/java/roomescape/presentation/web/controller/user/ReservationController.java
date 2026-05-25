@@ -31,14 +31,17 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<ReservationResponse> register(@Valid @RequestBody ReservationRequest reservationRequest) {
-        ReservationResponse reservationResponse = reservationService.register(reservationRequest);
+        ReservationResponse reservationResponse = ReservationResponse.from(
+                reservationService.register(reservationRequest.toCommand()));
         return ResponseEntity.created(URI.create("/reservations/" + reservationResponse.id()))
                 .body(reservationResponse);
     }
 
     @GetMapping
     public ResponseEntity<List<ReservationResponse>> readAllByName(@NotBlank @RequestParam String username) {
-        List<ReservationResponse> reservationResponses = reservationService.readAllByName(username);
+        List<ReservationResponse> reservationResponses = reservationService.readAllByName(username).stream()
+                .map(ReservationResponse::from)
+                .toList();
         return ResponseEntity.ok(reservationResponses);
     }
 
@@ -52,7 +55,8 @@ public class ReservationController {
     public ResponseEntity<ReservationResponse> update(@PathVariable Long id,
                                                       @NotBlank @RequestParam String username,
                                                       @Valid @RequestBody ReservationUpdateRequest reservationUpdateRequest) {
-        ReservationResponse reservationResponse = reservationService.update(id, username, reservationUpdateRequest);
+        ReservationResponse reservationResponse = ReservationResponse.from(
+                reservationService.update(id, username, reservationUpdateRequest.toCommand()));
         return ResponseEntity.ok().body(reservationResponse);
     }
 }

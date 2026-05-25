@@ -36,7 +36,7 @@ public class TimeServiceTest {
         TimeRequest timeRequest = new TimeRequest(LocalTime.of(8, 0));
 
         // when
-        Assertions.assertThatCode(() -> timeService.register(timeRequest))
+        Assertions.assertThatCode(() -> timeService.register(timeRequest.toCommand()))
                 .doesNotThrowAnyException();
     }
 
@@ -46,7 +46,7 @@ public class TimeServiceTest {
         TimeRequest timeRequest = new TimeRequest(LocalTime.of(10, 0));
 
         // when
-        Assertions.assertThatThrownBy(() -> timeService.register(timeRequest))
+        Assertions.assertThatThrownBy(() -> timeService.register(timeRequest.toCommand()))
                 .isInstanceOf(ConflictException.class)
                 .extracting("errorCode")
                 .isEqualTo(ErrorCode.TIME_DUPLICATED);
