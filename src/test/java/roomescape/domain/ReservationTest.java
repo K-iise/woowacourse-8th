@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import roomescape.exception.DomainValidationException;
-import roomescape.exception.ErrorCode;
-import roomescape.model.Reservation;
-import roomescape.model.ReservationTime;
-import roomescape.model.Theme;
+import roomescape.domain.exception.DomainValidationException;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.model.Reservation;
+import roomescape.domain.model.ReservationTime;
+import roomescape.domain.model.Theme;
 
 public class ReservationTest {
 

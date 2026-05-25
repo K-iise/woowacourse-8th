@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import roomescape.exception.DomainValidationException;
-import roomescape.exception.ErrorCode;
-import roomescape.model.Theme;
+import roomescape.domain.exception.DomainValidationException;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.model.Theme;
 
 public class ThemeTest {
 

@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.annotation.DirtiesContext;
-import roomescape.dto.ThemeRequest;
-import roomescape.exception.ErrorCode;
+import roomescape.presentation.web.dto.ThemeRequest;
+import roomescape.domain.exception.ErrorCode;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -71,7 +71,7 @@ public class ThemeControllerTest {
                 .then().log().all()
                 .statusCode(400);
     }
-    
+
     @Test
     public void 테마_등록_시_이름이_중복이면_409를_반환한다() {
         ThemeRequest themeRequest = new ThemeRequest("붉은 요람", "테스트입니다", "url");

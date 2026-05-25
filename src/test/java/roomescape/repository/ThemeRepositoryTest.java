@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import roomescape.dto.ThemeRequest;
-import roomescape.model.Theme;
+import roomescape.infrastructure.persistence.repository.ThemeRepository;
+import roomescape.presentation.web.dto.ThemeRequest;
+import roomescape.domain.model.Theme;
 
 
 @JdbcTest

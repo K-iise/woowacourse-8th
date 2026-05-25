@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
-import roomescape.dto.ThemeResponse;
-import roomescape.exception.ErrorCode;
-import roomescape.exception.NotFoundException;
-import roomescape.exception.UnprocessableEntityException;
-import roomescape.model.ReservationTime;
-import roomescape.model.Theme;
-import roomescape.repository.ReservationRepository;
-import roomescape.repository.ThemeRepository;
-import roomescape.repository.TimeRepository;
+import roomescape.application.service.ThemeService;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.exception.NotFoundException;
+import roomescape.domain.exception.UnprocessableEntityException;
+import roomescape.domain.model.ReservationTime;
+import roomescape.domain.model.Theme;
+import roomescape.presentation.web.dto.ThemeResponse;
+import roomescape.infrastructure.persistence.repository.ReservationRepository;
+import roomescape.infrastructure.persistence.repository.ThemeRepository;
+import roomescape.infrastructure.persistence.repository.TimeRepository;
 
 @SpringBootTest
 @Transactional

@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import roomescape.dto.TimeRequest;
-import roomescape.exception.ConflictException;
-import roomescape.exception.ErrorCode;
-import roomescape.exception.NotFoundException;
-import roomescape.exception.UnprocessableEntityException;
+import roomescape.application.service.TimeService;
+import roomescape.domain.exception.ConflictException;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.exception.NotFoundException;
+import roomescape.domain.exception.UnprocessableEntityException;
+import roomescape.presentation.web.dto.TimeRequest;
 
 @SpringBootTest
 @Transactional

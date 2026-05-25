@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import roomescape.model.ReservationTime;
+import roomescape.domain.model.ReservationTime;
+import roomescape.infrastructure.persistence.repository.TimeRepository;
 
 @JdbcTest
 public class TimeRepositoryTest {

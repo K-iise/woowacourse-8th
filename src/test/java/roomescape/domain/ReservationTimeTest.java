@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalTime;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import roomescape.exception.ErrorCode;
-import roomescape.exception.UnprocessableEntityException;
-import roomescape.model.ReservationTime;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.exception.UnprocessableEntityException;
+import roomescape.domain.model.ReservationTime;
 
 public class ReservationTimeTest {
 
