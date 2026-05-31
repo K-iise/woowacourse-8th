@@ -1,0 +1,60 @@
+package lotto.domain;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.StringJoiner;
+import lotto.exception.ErrorMessage;
+
+public class Lotto {
+    private final List<Integer> numbers;
+
+    public Lotto(List<Integer> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
+        validateRange(numbers);
+        this.numbers = sortNumber(numbers);
+    }
+    
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_MUST_HAVE_SIX_NUMBERS.getMessage());
+        }
+    }
+
+    private void validateDuplication(List<Integer> numbers) {
+        if (numbers.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBERS_MUST_BE_UNIQUE.getMessage());
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        numbers.forEach(this::validateSingleRange);
+    }
+
+    private void validateSingleRange(int number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
+        }
+    }
+
+    private List<Integer> sortNumber(List<Integer> numbers) {
+        List<Integer> sorted = new ArrayList<>(numbers);
+        sorted.sort(Comparator.naturalOrder());
+        return sorted;
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        for (int number : getNumbers()) {
+            joiner.add(String.valueOf(number));
+        }
+        return joiner.toString();
+    }
+}
