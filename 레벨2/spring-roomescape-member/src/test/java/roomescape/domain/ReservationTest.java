@@ -1,0 +1,105 @@
+package roomescape.domain;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import roomescape.domain.exception.DomainValidationException;
+import roomescape.domain.exception.ErrorCode;
+import roomescape.domain.model.Reservation;
+import roomescape.domain.model.ReservationTime;
+import roomescape.domain.model.Theme;
+
+public class ReservationTest {
+
+    @Test
+    public void 사용자_이름은_20자_이하를_가진다() {
+        Theme theme = new Theme(1L, "붉은 요람", "아이의 울음소리가 멈추면, 비로소 당신의 비명이 시작됩니다.", "https://fake.html") {
+        };
+        int hour = 12;
+        int minute = 0;
+        ReservationTime reservationTime = new ReservationTime((long) 0, LocalTime.of(hour, minute));
+        Reservation reservation = new Reservation(1L, "홍길동", LocalDate.now(),
+                reservationTime,
+                theme);
+
+        int size = 3;
+        int nameSize = reservation.getName().length();
+
+        assertEquals(size, nameSize);
+    }
+
+    @Test
+    public void 사용자_이름이_20자_초과_될_경우_예외가_발생한다() {
+        Theme theme = new Theme(1L, "붉은 요람", "아이의 울음소리가 멈추면, 비로소 당신의 비명이 시작됩니다.", "https://fake.html") {
+        };
+        ReservationTime reservationTime = new ReservationTime((long) 0, LocalTime.of(12, 0));
+
+        Assertions.assertThatThrownBy(() ->
+                        new Reservation(1L, "홍길동란ㅇ렁나ㅓ너러안너러아러니아러니더리너디러니더라어니다ㅓ리너디ㅓ아러다러다러나더라어라더아러다어라더", LocalDate.now(),
+                                reservationTime,
+                                theme))
+                .isInstanceOf(DomainValidationException.class)
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NAME_LENGTH_INVALID);
+    }
+
+    @Test
+    public void 사용자_이름이_빈칸_일_경우_예외가_발생한다() {
+        Theme theme = new Theme(1L, "붉은 요람", "아이의 울음소리가 멈추면, 비로소 당신의 비명이 시작됩니다.", "https://fake.html") {
+        };
+        ReservationTime reservationTime = new ReservationTime((long) 0, LocalTime.of(12, 0));
+
+        Assertions.assertThatThrownBy(() ->
+                        new Reservation(1L, "", LocalDate.now(),
+                                reservationTime,
+                                theme))
+                .isInstanceOf(DomainValidationException.class)
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_NAME_BLANK);
+    }
+
+    @Test
+    public void 예약_날짜가_누락될_경우_예외가_발생한다() {
+        Theme theme = new Theme(1L, "붉은 요람", "아이의 울음소리가 멈추면, 비로소 당신의 비명이 시작됩니다.", "https://fake.html") {
+        };
+        ReservationTime reservationTime = new ReservationTime((long) 0, LocalTime.of(12, 0));
+
+        Assertions.assertThatThrownBy(() ->
+                        new Reservation(1L, "토리임", null,
+                                reservationTime,
+                                theme))
+                .isInstanceOf(DomainValidationException.class)
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_DATE_NULL);
+    }
+
+    @Test
+    public void 테마가_누락될_경우_예외가_발생한다() {
+        ReservationTime reservationTime = new ReservationTime((long) 0, LocalTime.of(12, 0));
+
+        Assertions.assertThatThrownBy(() ->
+                        new Reservation(1L, "토리임", LocalDate.now(),
+                                reservationTime,
+                                null))
+                .isInstanceOf(DomainValidationException.class)
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_THEME_NULL);
+    }
+
+    @Test
+    public void 예약_시간이_NULL일_경우_예외가_발생한다() {
+        Theme theme = new Theme(1L, "붉은 요람", "아이의 울음소리가 멈추면, 비로소 당신의 비명이 시작됩니다.", "https://fake.html") {
+        };
+
+        Assertions.assertThatThrownBy(() ->
+                        new Reservation(1L, "토리임", LocalDate.now(),
+                                null,
+                                theme))
+                .isInstanceOf(DomainValidationException.class)
+                .extracting("errorCode")
+                .isEqualTo(ErrorCode.RESERVATION_TIME_NULL);
+    }
+}
