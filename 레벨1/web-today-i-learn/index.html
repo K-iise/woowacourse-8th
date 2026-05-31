@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <!-- TODO: Open Graph 메타 태그를 설정하세요 -->
+    <!-- <meta property="og:title" content="페이지 제목" /> -->
+    <!-- <meta property="og:description" content="페이지 설명" /> -->
+    <!-- <meta property="og:image" content="./images/thumbnail.jpg" /> -->
+    <meta property="og:title" content=""/>
+    <title>Today I Learn</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/index.js" defer></script>
+  </head>
+  <body>
+    <!-- 상단 내비게이션 -->
+    <nav class="top-nav">
+      <span class="nav-logo">My Page</span>
+      <ul class="nav-links">
+        <li><a href="#about">자기소개</a></li>
+        <li><a href="#gallery">갤러리</a></li>
+        <li><a href="#works">인생 작품</a></li>
+        <li><a href="#til">TIL</a></li>
+      </ul>
+    </nav>
+
+    <!-- 프로필 히어로 -->
+    <section class="hero" id="about">
+      <div class="profile-card">
+        <div class="profile-image">
+          <img src="./images/tori.png" alt="프로필 사진">
+        </div>
+        <div class="profile-info">
+          <h1>토리(김윤기)</h1>
+          <p class="tagline">No pain No gain</p>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <!-- 자기소개 -->
+      <section class="content-section">
+        <h2>자기소개</h2>
+        <p>안녕하세요 우아한테크코스 BE 8기 토리입니다. <br> 매일 성장하는 개발자가 되고 싶습니다.</p>
+        <div class="social-links">
+          <a href="https://github.com/K-iise" target="_blank">GitHub 바로가기</a>
+        </div>
+      </section>
+
+      <!-- 기본 정보 -->
+      <section class="content-section" id="info">
+        <h2>기본 정보</h2>
+        <!-- TODO: 자신의 기본 정보를 표(<table>)로 정리하세요 -->
+        <table class="info-table">
+          <tr>
+            <th>이름</th>
+            <td>김윤기</td>
+          </tr>
+          <tr>
+            <th>MBTI</th>
+            <td>ISFP</td>
+          </tr>
+          <tr>
+            <th>취미</th>
+            <td>농구, 축구 보기</td>
+          </tr>
+          <tr>
+            <th>좋아하는 음식</th>
+            <td>라멘, 치킨</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- 나만의 갤러리 -->
+      <section class="content-section" id="gallery">
+        <h2>나만의 갤러리</h2>
+        <p class="section-desc">나의 감성을 채워준 9가지 앨범</p>
+        <div class="gallery-grid">
+          <img src="./images/album-kflip.jpg" alt="K-FLIP">
+          <img src="./images/album-independence.jpg" alt="독립음악">
+          <img src="./images/album-keung.jpg" alt="킁">
+          <img src="./images/album-strobo.jpg" alt="strobo">
+          <img src="./images/album-replica.jpg" alt="replica">
+          <img src="./images/album-spyair.jpg" alt="Rockin' The World">
+          <img src="./images/album-green.jpg" alt="녹색이념">
+          <img src="./images/album-alive4.jpg" alt="살아숨셔4">
+          <img src="./images/album-2426.jpg" alt="24:26">
+        </div>
+      </section>
+
+      <section class="content-section" id="works">
+        <h2>나의 인생 작품</h2>
+        <div class="works-list">
+          <article class="work-card">
+            <div class="work-info">
+              <h3>만화: 드래곤볼 (Dragon Ball)</h3>
+              <p>
+                단순한 만화를 넘어 노력과 한계를 돌파하는 모습을 보여준 인생 작품입니다.
+                특히 천재적인 재능에 안주하지 않고, 라이벌을 보며 끊임없이 자신을 채찍질하며
+                성장하는 <strong>베지터</strong>의 모습에서 큰 영감을 얻습니다.
+                타인과의 비교를 성장의 동력으로 삼는 그의 태도는 제가 지향하는 개발자의 모습이기도 합니다.
+              </p>
+              <img src="images/no_1.jpeg" alt="너가 넘버원이다">
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-info">
+              <h3>다큐멘터리: 마이클 조던: 더 라스트 댄스</h3>
+              <p>
+                승리를 향한 조던의 압도적인 집념과 팀원들을 이끄는 리더십에 큰 전율을 느꼈습니다.
+                최고의 자리에 있어도 멈추지 않는 그 열정을 닮고 싶습니다.
+              </p>
+            </div>
+            <div class="video-container">
+              <iframe
+                      width="100%"
+                      height="315"
+                      src="https://www.youtube.com/embed/TV369FwgCNg"
+                      title="The Last Dance | Official Trailer | Netflix"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen>
+              </iframe>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- TIL (Today I Learned) -->
+      <section class="content-section" id="til">
+        <h2>TIL</h2>
+        <p class="section-desc">오늘 새롭게 배운 것들을 기록합니다.</p>
+
+        <!-- TIL 작성 폼 -->
+        <form class="til-form" id="til-form">
+          <div class="form-group">
+            <label for="til-date">날짜</label>
+            <input type="date" id="til-date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="til-title">제목</label>
+            <input type="text" id="til-title" name="title" placeholder="학습 주제를 입력하세요" required />
+          </div>
+          <div class="form-group">
+            <label for="til-content">내용</label>
+            <textarea id="til-content" name="content" placeholder="오늘 배운 내용을 정리해주세요" required></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit">등록</button>
+            <button type="reset">초기화</button>
+          </div>
+        </form>
+
+        <!-- TIL 목록: 폼으로 등록하면 여기에 항목이 추가됩니다 -->
+        <div class="til-list" id="til-list">
+          <!-- 아래는 예시 항목입니다. 자유롭게 수정하거나 삭제하세요 -->
+          <article class="til-item">
+            <time>2026-03-15</time>
+            <h3>HTML 시멘틱 태그</h3>
+            <p>header, nav, main, section, article, footer 등 시멘틱 태그의 역할과 사용법을 배웠다.</p>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy; My Page</p>
+    </footer>
+  </body>
+</html>
